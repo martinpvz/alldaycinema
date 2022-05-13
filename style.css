@@ -91,3 +91,177 @@ body main form .login-button {
 .register-link {
   font-weight: bold;
 }
+.create-text {
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.form-register {
+  min-width: 100px;
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 2rem;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.user-data__form {
+  margin-bottom: 15px;
+  display: flex;
+}
+.user-data__form p {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  color: white;
+  font-weight: bold;
+  align-self: center;
+  justify-self:flex-start;
+}
+.user-data__form input {
+  width: 60%;
+  margin-left: auto;
+  height: 48px;
+  /* color: #406e8e; */
+  color: black;
+  padding: 0 14px 0 14px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #e1f2fe;
+  transition: box-shadow 0.4s ease;
+}
+.user-data__form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ee5622;
+}
+.control-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+body main form .button-register {
+  margin: 15px 0 10px 0;
+  align-self: center;
+  width: 30%;
+  height: 48px;
+  padding: 0 14px 0 14px;
+  font-size: 1.6rem;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+body main form .register-button {
+  background-color: #ee5622;
+}
+body main form .register-button:hover {
+  background-color: #ee6c4d;  
+  cursor: pointer;
+}
+body main form .cancel-button {
+  background-color: #ee2222;
+}
+body main form .cancel-button:hover {
+  background-color: #ee4d4d;  
+  cursor: pointer;
+}
+.account-select {
+  width: 60%;
+  margin-left: auto;
+  height: 48px;
+  /* color: #406e8e; */
+  color: black;
+  padding: 0 14px 0 14px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #e1f2fe;
+  transition: box-shadow 0.4s ease;
+}
+.account-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ee5622;
+}
+span.msg,
+span.choose {
+  padding: 5px 0 10px;
+  display: none;
+}
+/*Styling Selectbox*/
+.dropdown {
+  position: relative;
+  width: 60%;
+  margin-left: auto;
+  height: 48px;
+  /* color: #406e8e; */
+  color: black;
+  padding: 0 14px 0 14px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #e1f2fe;
+  transition: box-shadow 0.4s ease;
+}
+.dropdown .select {
+    cursor: pointer;
+    display: block;
+    padding: 10px
+}
+.dropdown .select > i {
+    font-size: 13px;
+    color: #ee5622;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    float: right;
+    line-height: 20px
+}
+.dropdown:hover {
+    box-shadow: 0 0 4px #ee5622;
+}
+.dropdown:active {
+    background-color: #e1f2fe
+}
+.dropdown.active:hover,
+.dropdown.active {
+    box-shadow: 0 0 4px #ee5622;
+    border-radius: 2px 2px 0 0;
+    background-color: #e1f2fe
+}
+.dropdown.active .select > i {
+    transform: rotate(-90deg)
+}
+.dropdown .dropdown-menu {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    left: 0;
+    margin-top: 1px;
+    box-shadow: 0 1px 2px #ee5622;
+    border-radius: 0 1px 2px 2px;
+    overflow: hidden;
+    display: none;
+    max-height: 144px;
+    overflow-y: auto;
+    z-index: 9
+}
+.dropdown .dropdown-menu li {
+    padding: 10px;
+    transition: all .2s ease-in-out;
+    cursor: pointer
+} 
+.dropdown .dropdown-menu {
+    padding: 0;
+    list-style: none
+}
+.dropdown .dropdown-menu li:hover {
+    background-color: #ee6c4d;  
+}
+.dropdown .dropdown-menu li:active {
+    background-color: #e2e2e2
+}
+.button-register {
+
+}
