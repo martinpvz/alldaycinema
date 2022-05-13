@@ -80,7 +80,7 @@ body {
   background-color: #ee5622;
   transition: 0.3s;
 }
-.login-button:hover {
+main form .login-button:hover {
   background-color: #ee6c4d;  
   cursor: pointer;
 }
