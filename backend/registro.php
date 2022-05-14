@@ -1,22 +1,35 @@
 <?php
-include_once __DIR__.'/database.php';
+namespace API\Create;
+    
+use  API\Database;
+require_once __DIR__.'/../database.php';
 
-echo "Holaaa";
-$pais = $_POST["country"];
-echo $pais;
+class registrar extends Database {
 
-/*if(isset($_POST["guardar"])){
-    if(strlen($_POST["name"]) < 1 && strlen($_POST["lastname"])<1 && strlen($_POST["account"])<1 && strlen($_POST["account"])<1 && strlen($_POST["card"])<1 && strlen($_POST["suscription"])<1 && strlen($_POST["user"])<1 && strlen($_POST["password"]) <1){
-        $nombre = trim($_POST["name"]);
-        $apellidos = trim($_POST["lastname"]);
-        $tipoCuenta = trim($_POST["account"]);
-        $pais = trim($_POST["account"]);
-        $numTarjeta = trim($_POST["card"]);
-        $suscripcion = trim($_POST["suscription"]);
-        $usuario = trim($_POST["user"]);
-        $contraseña = trim($_POST["password"]);
+    public function add($post){
+        $nombre = trim($post["name"]);
+        $apellidos = trim($post["lastname"]);
+        $correo = trim($post["email"]);
+        $tipoCuenta = trim($post["account"]);
+        $pais = trim($post["country"]);
+        $numTarjeta = trim($post["card"]);
+        $suscripcion = trim($post["suscription"]);
+        $usuario = trim($post["user"]);
+        $contraseña = trim($post["password"]);
 
-        $sql = "INSERT INTO cuenta(nombre, apellidos, correo, tipo, pais, numTarjeta, periodicidad, fechaCreacion, eliminado) VALUES ('$nombre','$apellidos','$usuario', '$tipoCuenta','$pais','$numTarjeta','$suscripcion')";
+        //INSERT INTO usuario (idusuario, idcuenta, user, pass, nivel)
+        //(NULL, 1, 'admin', 'admin', 0);
+        //SELECT idcuenta FROM cuenta WHERE $_POST['nombre']=nombre;
+        //(NULL, $idcuenta, $_POST['usuario'], $_POST['password'], $_POST['nivel'])
+
+        $sql = "INSERT INTO cuenta(idcuenta, nombre, apellidos, correo, tipo, pais, numTarjeta, periodicidad, fechaCreacion) VALUES (NULL,'$nombre','$apellidos','$correo', '$tipoCuenta','$pais','$numTarjeta','$suscripcion', 'now()')";
+        $result = $conexion->query($sql);
+
+        $idcuenta = $conexion->query("SELECT idcuenta FROM cuenta WHERE nombre = $nombre");
+
+
+        $sql = "INSERT INTO usuario (idusuario, idcuenta, user, pass) VALUES (NULL, '$idcuenta','$usuario','$contraseña')";
+        $result = $conexion->query($sql);
+        }
     }
-}*/
 ?>
