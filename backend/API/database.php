@@ -3,14 +3,14 @@
     
     abstract class Database{
         protected $conexion;
-        protected $response;
+        //protected $response;
 
-        public function __construct($nameBd = 'marketzone')
+        public function __construct($nameBd = 'vod')
         {
             $this -> conexion = @mysqli_connect(
                 'localhost',
                 'root',
-                'pichu2015',
+                'faafaite',
                 $nameBd
             );
             if (!$this->conexion ){
@@ -20,8 +20,8 @@
         }
 
         // Función getResponse
-        public function getResponse(){
-            return json_encode($this->response, JSON_PRETTY_PRINT);
-        }
+        // public function getResponse(){
+        //     return json_encode($this->response, JSON_PRETTY_PRINT);
+        // }
     }
 ?>

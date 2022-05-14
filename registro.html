@@ -18,7 +18,7 @@
 
   <main class="main-login">
     <h2 class="create-text">Crear cuenta</h2>
-    <form action="./backend/registro.php" method="post" class="form-register">
+    <form action="./backend/cuenta-registro.php" method="post" class="form-register">
       <div class="user-data__form name">
         <p>Nombre</p>
         <input type="text" name="name" id="name" required>
@@ -40,9 +40,9 @@
             </div>
             <input type="hidden" name="account">
             <ul class="dropdown-menu">
-              <li id="free">Free</li>
-              <li id="premium">Premium</li>
-              <li id="premium">Familiar</li>
+              <li id="0">Free</li>
+              <li id="1">Premium</li>
+              <li id="2">Familiar</li>
             </ul>
           </div>
       <span class="msg"></span>
@@ -76,8 +76,8 @@
             </div>
             <input type="hidden" name="suscription">
             <ul class="dropdown-menu">
-              <li id="month">Mensual</li>
-              <li id="anual">Anual</li>
+              <li id="0">Mensual</li>
+              <li id="1">Anual</li>
             </ul>
           </div>
       <span class="msg"></span>

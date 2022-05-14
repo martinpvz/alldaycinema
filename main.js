@@ -71,3 +71,14 @@ document.getElementById("search-main").onblur = () => {
   document.getElementById("buscador-div").style.filter = "drop-shadow(0 0 0 white)"
   console.log('hola')
 }
+
+//MENSAJE DE ÉXITO DE REGISTRO
+$.ajax({
+  url: './backend/cuenta-registro.php',
+  type: 'POST',
+  success: function(response){
+      console.log(response);
+      let respuesta = JSON.parse(response);
+      alert("registro exitoso");
+  }
+});

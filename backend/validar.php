@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__.'/database.php';
+//Adaptar a las clases php
+include_once __DIR__.'./API/database.php';
 
 $usuario = $_POST["email"];
 $contraseña = $_POST["password"];
