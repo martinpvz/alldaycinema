@@ -20,10 +20,6 @@
       <img src="./img/home.png" alt="Inicio">
       <span>Home</span>
     </a>
-    <a href="#" class="selector-main go-search">
-      <img src="./img/search.png" alt="Buscar">
-      <span>Search</span>
-    </a>
     <a href="#" class="selector-main go-movies">
       <img src="./img/movies.png" alt="Peliculas">
       <span>Movies</span>
@@ -32,9 +28,22 @@
       <img src="./img/series.png" alt="Series">
       <span>Series</span>
     </a>
-    <div class="profile-main">
+    <div class="selector-main go-search" id="buscador-div">
+      <img src="./img/search.png" alt="Buscar">
+      <!-- <span>Search</span> -->
+      <input type="text" placeholder="Search" id="search-main">
+    </div>
+    <div class="profile-main" id="perfil-main">
       <span class="profile-name">profileName</span>
       <img src="./img/perfil.png" alt="">
+    </div>
+    <div class="profile-controlers" id="controles-main">
+      <a href="./profiles.html" class="profile-controler">
+        <p>Cambiar perfil</p>
+      </a>
+      <a href="./index.html" class="profile-controler">
+        <p>Cerrar sesión</p>
+      </a>
     </div>
   </header>
   <main>
@@ -65,35 +74,35 @@
         <div class="carousel-inner relative w-full overflow-hidden rounded-2xl shadow-md">
           <div class="carousel-item active relative float-left w-full">
             <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
+              src="./img/batmanPoster.jpg"
               class="block w-full"
               alt="..."
             />
             <div class="carousel-caption hidden md:block absolute text-center">
-              <h5 class="text-xl">First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+              <h5 class="text-5xl mb-2">The Batman</h5>
+              <p class="text-2xl mb-6">Batman ventures into Gotham City's underworld when a sadistic killer leaves behind a trail of cryptic clues.</p>
             </div>
           </div>
           <div class="carousel-item relative float-left w-full">
             <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
+              src="./img/gotPoster.jpg"
               class="block w-full"
               alt="..."
             />
             <div class="carousel-caption hidden md:block absolute text-center">
-              <h5 class="text-xl">Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+              <h5 class="text-5xl mb-2">Game of Thrones</h5>
+              <p class="text-2xl mb-6">Nine noble families wage war against each other in order to gain control over the mythical land of Westeros.</p>
             </div>
           </div>
           <div class="carousel-item relative float-left w-full">
             <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
+              src="./img/mrrobotPoster.jpg"
               class="block w-full"
               alt="..."
             />
             <div class="carousel-caption hidden md:block absolute text-center">
-              <h5 class="text-xl">Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
+              <h5 class="text-5xl mb-2">Mr. Robot</h5>
+              <p class="text-2xl mb-6">Elliot, a cyber-security engineer suffering from anxiety, works for a corporation and hacks felons by night.</p>
             </div>
           </div>
         </div>
@@ -118,14 +127,295 @@
       </div>
     </section>
 
-    <!-- <section class="generos-main">
-      <a href="#" class="">
-        <img src="./img/marvel.jpg" alt="">
+    <section class="generos-main">
+      <a href="#" class="genero-card">
+        <img src="./img/accion.webp" alt="">
       </a>
-    </section> -->
+      <a href="#" class="genero-card">
+        <img src="./img/ciencia.jpg" alt="">
+      </a>
+      <a href="#" class="genero-card">
+        <img src="./img/drama.jpg" alt="">
+      </a>
+      <a href="#" class="genero-card">
+        <img src="./img/suspenso.jpg" alt="">
+      </a>
+    </section>
+
+    <section class="carousel2">
+      <p class="title-main">Acción</p>
+
+      <div class="carousel2__container">
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/3226442/pexels-photo-3226442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/2530808/pexels-photo-2530808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4869701/pexels-photo-4869701.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/7919753/pexels-photo-7919753.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4922971/pexels-photo-4922971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="carousel2">
+      <p class="title-main">Comedia</p>
+
+      <div class="carousel2__container">
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/3226442/pexels-photo-3226442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/2530808/pexels-photo-2530808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4869701/pexels-photo-4869701.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/7919753/pexels-photo-7919753.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4922971/pexels-photo-4922971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="carousel2">
+      <p class="title-main">Musical</p>
+
+      <div class="carousel2__container">
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/3226442/pexels-photo-3226442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/2530808/pexels-photo-2530808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4869701/pexels-photo-4869701.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/7919753/pexels-photo-7919753.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4922971/pexels-photo-4922971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="carousel2">
+      <p class="title-main">Fantasia</p>
+
+      <div class="carousel2__container">
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/3226442/pexels-photo-3226442.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/2530808/pexels-photo-2530808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4869701/pexels-photo-4869701.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/7919753/pexels-photo-7919753.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+
+        <div class="carousel2-item">
+          <img src="https://images.pexels.com/photos/4922971/pexels-photo-4922971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940.jpg" alt="Foto de mujer con vestido rojo" class="carousel-item__imagen">
+          <div class="carousel-item__details">
+            <div>
+              <img src="./img/play-icon.png" alt="Boton de play">
+              <img src="./img/plus-icon.png" alt="Boton de plus">
+            </div>
+            <p class="carousel-item__details--title">Titulo descriptivo</p>
+            <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
 
 </body>
 </html>
