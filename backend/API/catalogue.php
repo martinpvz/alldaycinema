@@ -19,25 +19,100 @@ class Catalogo extends DataBase
         return json_encode($this->response, JSON_PRETTY_PRINT);
     }
 
-    public function list()
+    public function list($get)
     {
         $this->response = array();
-        $sql = "
-            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo
+        $tipo = $get['type'];
+        if ($get['type'] == "Movies") {
+            $sql = "
+            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo, p.rutaPortada
             FROM peliculas AS p 
             LEFT JOIN regiones AS r ON p.idgenero = r.idregion
             LEFT JOIN generos AS g ON p.idgenero = g.idgenero
             LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
-            WHERE p.eliminado = 0
-            UNION
-            SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave, g.nombre, c.clave, s.lanzamiento, s.titulo
+            WHERE p.eliminado = 0";
+        } elseif($get['type'] == "Series") {
+            $sql = "
+            SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave, g.nombre, c.clave, s.lanzamiento, s.titulo, s.rutaPortada
             FROM series AS s 
             LEFT JOIN regiones AS r ON s.idgenero = r.idregion
             LEFT JOIN generos AS g ON s.idgenero = g.idgenero
             LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
             WHERE s.eliminado = 0
             ";
-
+        } elseif($get['type'] == "Acción") {
+            $sql = "
+            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo, p.rutaPortada
+            FROM peliculas AS p 
+            LEFT JOIN regiones AS r ON p.idgenero = r.idregion
+            LEFT JOIN generos AS g ON p.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
+            WHERE p.eliminado = 0 AND p.idgenero = 2
+            UNION
+            SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave, g.nombre, c.clave, s.lanzamiento, s.titulo, s.rutaPortada
+            FROM series AS s 
+            LEFT JOIN regiones AS r ON s.idgenero = r.idregion
+            LEFT JOIN generos AS g ON s.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
+            WHERE s.eliminado = 0 AND s.idgenero = 2
+            ";
+        } elseif($get['type'] == "Ciencia Ficción") {
+            $sql = "
+            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo, p.rutaPortada
+            FROM peliculas AS p 
+            LEFT JOIN regiones AS r ON p.idgenero = r.idregion
+            LEFT JOIN generos AS g ON p.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
+            WHERE p.eliminado = 0 AND p.idgenero = 1
+            UNION
+            SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave, g.nombre, c.clave, s.lanzamiento, s.titulo, s.rutaPortada
+            FROM series AS s 
+            LEFT JOIN regiones AS r ON s.idgenero = r.idregion
+            LEFT JOIN generos AS g ON s.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
+            WHERE s.eliminado = 0 AND s.idgenero = 1
+            ";
+        } elseif($get['type'] == "Drama") {
+            $sql = "
+            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo, p.rutaPortada
+            FROM peliculas AS p 
+            LEFT JOIN regiones AS r ON p.idgenero = r.idregion
+            LEFT JOIN generos AS g ON p.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
+            WHERE p.eliminado = 0 AND p.idgenero = 5
+            UNION
+            SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave, g.nombre, c.clave, s.lanzamiento, s.titulo, s.rutaPortada
+            FROM series AS s 
+            LEFT JOIN regiones AS r ON s.idgenero = r.idregion
+            LEFT JOIN generos AS g ON s.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
+            WHERE s.eliminado = 0 AND s.idgenero = 5
+            ";
+        } elseif($get['type'] == "Suspenso") {
+            $sql = "
+            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo, p.rutaPortada
+            FROM peliculas AS p 
+            LEFT JOIN regiones AS r ON p.idgenero = r.idregion
+            LEFT JOIN generos AS g ON p.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
+            WHERE p.eliminado = 0 AND p.idgenero = 8
+            UNION
+            SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave, g.nombre, c.clave, s.lanzamiento, s.titulo, s.rutaPortada
+            FROM series AS s 
+            LEFT JOIN regiones AS r ON s.idgenero = r.idregion
+            LEFT JOIN generos AS g ON s.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
+            WHERE s.eliminado = 0 AND s.idgenero = 8
+            ";
+        } else {
+            $sql = "
+            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo, p.rutaPortada, p.duracion
+            FROM peliculas AS p
+            LEFT JOIN regiones AS r ON p.idgenero = r.idregion
+            LEFT JOIN generos AS g ON p.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
+            WHERE p.eliminado = 0 AND p.idgenero = $tipo";
+        }
         if ($result = $this->conexion->query($sql)) {
             $rows = $result->fetch_all(MYSQLI_ASSOC);
             if (!is_null($rows)) {

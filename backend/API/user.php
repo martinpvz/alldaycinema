@@ -30,7 +30,7 @@ class User extends DataBase
         $filas = mysqli_num_rows($result);
         
         if($filas){
-            header("location:../../profiles.html"); 
+            header("location:../../profiles.html?email=" . $_POST['email']); 
         }
         else{
             header("location:../../index.html"); 

@@ -10,7 +10,7 @@ class Perfiles extends DataBase
 {
     public function __construct($string = 'vod')
     {
-        $this->response = "";
+        $this->response;
         parent::__construct($string);
     }
 
@@ -21,17 +21,17 @@ class Perfiles extends DataBase
 
     public function list($get)
     {
-        $this->response = array();
+        $data = array();
+        // $this->response = array();
         $sql = "
             SELECT * FROM perfiles WHERE idcuenta = '{$get['cuenta']}' AND eliminado = 0;
             ";
-
         if ($result = $this->conexion->query($sql)) {
             $rows = $result->fetch_all(MYSQLI_ASSOC);
             if (!is_null($rows)) {
                 foreach ($rows as $num => $row) {
                     foreach ($row as $key => $value) {
-                        $this->response[$num][$key] = $value;
+                        $data[$num][$key] = $value;
                     }
                 }
             }
@@ -40,6 +40,7 @@ class Perfiles extends DataBase
             die('No se pudo completar la operación');
         }
         $this->conexion->close();
+        $this->response = $data;
     }
 
     public function add($post)
