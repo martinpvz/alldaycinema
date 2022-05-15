@@ -73,19 +73,24 @@ document.getElementById("search-main").onblur = () => {
 }
 
 //AGREGAR CUENTA Y USUARIO
-$('#addAccount').click(function () {
-  $.post('../backend/API/account.php', {
-    name: $('#name').val(),
-    lastname: $('#lastname').val(),
-    email: $('#email').val(),
-    account: $('#account').val(),
-    country: $('#country').val(),
-    card: $('#card').val(),
-    suscription: $('#suscription').val(),
-    user: $('#user').val(),
-    password: $('#password').val()
-  }, function (response) {
-      let respuesta = JSON.parse(response);
-      console.log(respuesta);
-  });
-});
+// $(document).ready(function () {
+//   $('#form-register').submit(function (e) {
+//     e.preventDefault();
+//     $.post('../backend/API/account.php', {
+//       name: $('#name').val(),
+//       lastname: $('#lastname').val(),
+//       email: $('#email').val(),
+//       account: $('#account').val(),
+//       country: $('#country').val(),
+//       card: $('#card').val(),
+//       suscription: $('#suscription').val(),
+//       user: $('#user').val(),
+//       password: $('#password').val()
+//     }, function (response) {
+//         let respuesta = JSON.parse(response);
+//         alert(respuesta)
+//         //console.log(respuesta);
+//     });
+//   });
+// });
+
