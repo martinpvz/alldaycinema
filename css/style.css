@@ -627,4 +627,34 @@ body header .go-search:hover {
   color: white;
 }
 
-/* hasta aqui */
+.list-container {
+  width: 100%;
+  height: auto;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+}
+
+.list-item {
+  width: 150px;
+  height: auto;
+  list-style: none;
+}
+
+.list-item img {
+  width: 150px;
+  transition: transform .3s;
+}
+
+.list-item img:hover {
+  transform: scale(1.1);
+}
+
+.title-list {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-left: 40px;
+  color: white;
+  font-family: "Lato";
+}
