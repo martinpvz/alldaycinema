@@ -12,7 +12,7 @@ abstract class Database
         $this->conexion = @mysqli_connect(
             'localhost',
             'root',
-            'localhost',
+            'faafaite',
             $string
         );
         if (!$this->conexion) {
