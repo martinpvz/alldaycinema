@@ -57,24 +57,16 @@ class Perfiles extends DataBase
             if ($result->num_rows == 0) {
                 $this->conexion->set_charset("utf8");
 
-                $query = "
-                    SELECT count(nombre) AS total FROM perfiles WHERE eliminado = 0 AND idcuenta = '2'
-                    ";
-                $result = $this->conexion->query($query);
-                if ($result->total < 2) {
-                    $sql = "
-                        INSERT INTO perfiles (idperfil, idcuenta, nombre, idioma, edad, rutaImagen) VALUES
-                        (null, '{$post['cuenta']}', '{$post['nombre']}', '{$post['idioma']}', '{$post['edad']}', '{$post['imagen']}')
+                $sql = "
+                    INSERT INTO perfiles (idperfil, idcuenta, nombre, idioma, edad, rutaImagen) VALUES
+                    (null, '{$post['cuenta']}', '{$post['nombre']}', '{$post['idioma']}', '{$post['edad']}', '{$post['imagen']}')
                     ";
 
-                    if ($this->conexion->query($sql)) {
-                        $this->response['estatus'] =  "Correcto";
-                        $this->response['mensaje'] =  "El perfil se agregó correctamente";
-                    } else {
-                        $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
-                    }
+                if ($this->conexion->query($sql)) {
+                    $this->response['estatus'] =  "Correcto";
+                    $this->response['mensaje'] =  "El perfil se agregó correctamente";
                 } else {
-                    $this->response['mensaje'] = "No se pudo ejecutar la instrucción, revisa que no tengas más de 7 perfiles registrados $sql. " . mysqli_error($this->conexion);
+                    $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
                 }
             }
             $result->free();
