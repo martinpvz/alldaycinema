@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Prueba M&eacute;todo POST Catálogo</h1>
+
+    <p>
+        <input type="submit" value="Muestra el contenido, lo que incluye películas y series" id="list">
+    </p>
+    <script>
+        $('#list').click(function () {
+            $.get('./catalogue/catalogue-list.php', function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p>
+        <input type="submit" value="Agrega la película The Banker" id="addPelicula">
+    </p>
+    <script>
+        $('#addPelicula').click(function () {
+            $.post('./catalogue/catalogue-addPelicula.php', {
+                region: "5",
+                genero: "5",
+                clasificacion: "3",
+                lanzamiento: "2020",
+                titulo: "The Banker",
+                duracion: "2h",
+                imagen: "/img/alldaycinema.png"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p>
+        <input type="submit" value="Agrega la serie Defending Jacob" id="addSerie">
+    </p>
+    <script>
+        $('#addSerie').click(function () {
+            $.post('./catalogue/catalogue-addSerie.php', {
+                region: "5",
+                genero: "5",
+                clasificacion: "3",
+                lanzamiento: "2020",
+                titulo: "Defending Jacob",
+                temporadas: "1",
+                capitulos: "8",
+                imagen: "/img/alldaycinema.png"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p>
+        <input type="submit" value="Editar la película con ID 1" id="editPelicula">
+    </p>
+    <script>
+        $('#editPelicula').click(function () {
+            $.post('./catalogue/catalogue-edit.php', {
+                id: "1",
+                tipo: "Pelicula",
+                region: "1",
+                genero: "6",
+                clasificacion: "1",
+                lanzamiento: "1900",
+                titulo: "Película editada",
+                duracion: "2h 30m",
+                imagen: "/img/alldaycinema.png",
+                eliminado: "0"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p>
+        <input type="submit" value="Editar la serie con ID 1" id="editSerie">
+    </p>
+    <script>
+        $('#editSerie').click(function () {
+            $.post('./catalogue/catalogue-edit.php', {
+                id: "1",
+                tipo: "Serie",
+                region: "1",
+                genero: "6",
+                clasificacion: "1",
+                lanzamiento: "1900",
+                titulo: "Serie editada",
+                temporadas: "10",
+                capitulos: "150",
+                imagen: "/img/alldaycinema.png",
+                eliminado: "0"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p>
+        <input type="submit" value="Elimina la película con ID 1" id="deletePelicula">
+    </p>
+    <script>
+        $('#deletePelicula').click(function () {
+            $.post('./catalogue/catalogue-delete.php', {
+                id: "1",
+                tipo: "Pelicula"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p>
+        <input type="submit" value="Elimina la serie con ID 1" id="deleteSerie">
+    </p>
+    <script>
+        $('#deleteSerie').click(function () {
+            $.post('./catalogue/catalogue-delete.php', {
+                id: "1",
+                tipo: "Serie"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p>
+        <input type="submit" value="Buscar contenido que coincida con el valor 20, incluye películas y series"
+            id="search">
+    </p>
+    <script>
+        $('#search').click(function () {
+            $.get('./catalogue/catalogue-search.php', {
+                search: "20"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <h1>Prueba M&eacute;todo POST Perfiles</h1>
+    <p><input type="submit" value="Muestra el contenido de los perfiles" id="listPerfiles"></p>
+    <script>
+        $('#listPerfiles').click(function () {
+            $.get('./profile/profile-list.php', {
+                cuenta: "2"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+
+    <p><input type="submit" value="Agrega un perfil en la cuenta del usuario karla.salcedo@correo.com" id="addPerfiles">
+    </p>
+    <script>
+        $('#addPerfiles').click(function () {
+            $.post('./profile/profile-add.php', {
+                cuenta: "2",
+                nombre: "Abuelo",
+                idioma: "English",
+                edad: "52",
+                imagen: "/img/alldaycinema.png"
+            }, function (response) {
+                let respuesta = JSON.parse(response);
+                console.log(respuesta);
+            });
+        });
+    </script>
+</body>
+
+</html>

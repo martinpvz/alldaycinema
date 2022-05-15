@@ -1,27 +1,22 @@
 <?php
-    namespace API;
-    
-    abstract class Database{
-        protected $conexion;
-        //protected $response;
 
-        public function __construct($nameBd = 'vod')
-        {
-            $this -> conexion = @mysqli_connect(
-                'localhost',
-                'root',
-                'faafaite',
-                $nameBd
-            );
-            if (!$this->conexion ){
-                echo "Error en la conexion";
-            }
-            $this->response = "";
+namespace DataBase;
+
+abstract class Database
+{
+    protected $conexion;
+    protected $response;
+
+    public function __construct($string)
+    {
+        $this->conexion = @mysqli_connect(
+            'localhost',
+            'root',
+            'localhost',
+            $string
+        );
+        if (!$this->conexion) {
+            die('No se pudo conectar a la base de datos');
         }
-
-        // Función getResponse
-        // public function getResponse(){
-        //     return json_encode($this->response, JSON_PRETTY_PRINT);
-        // }
     }
-?>
+}
