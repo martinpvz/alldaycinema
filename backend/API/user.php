@@ -19,12 +19,11 @@ class User extends DataBase
 
     public function validate($post)
     {
-
         session_start();
-        $_SESSION['email'] = $post['email'];
+        $_SESSION['user'] = $post['user'];
         
         //Consulta
-        $sql = "SELECT * FROM usuario WHERE user='{$post['email']}' and pass='{$post['password']}'";
+        $sql = "SELECT * FROM usuarios WHERE user='{$post['user']}' and pass='{$post['password']}'";
         $result = mysqli_query($this->conexion,$sql);
         
         $filas = mysqli_num_rows($result);
@@ -33,6 +32,7 @@ class User extends DataBase
             header("location:../../profiles.html?email=" . $_POST['email']); 
         }
         else{
+            //REVISAR MENSAJE DE FALLO DE CONEXIÓN
             header("location:../../index.html"); 
         }
         mysqli_free_result($result);

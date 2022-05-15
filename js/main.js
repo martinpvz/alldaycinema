@@ -73,18 +73,6 @@ document.getElementById("search-main").onblur = () => {
   console.log('hola')
 }
 
-//MENSAJE DE ÉXITO DE REGISTRO
-$.ajax({
-  url: './backend/cuenta-registro.php',
-  type: 'POST',
-  success: function(response){
-      console.log(response);
-      let respuesta = JSON.parse(response);
-      alert("registro exitoso");
-  }
-});
-
-
 document.getElementById("peliculas-selector").onclick = () => {
     localStorage.setItem("valor","Movies");
 }
