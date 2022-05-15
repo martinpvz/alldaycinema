@@ -72,13 +72,20 @@ document.getElementById("search-main").onblur = () => {
   console.log('hola')
 }
 
-//MENSAJE DE ÉXITO DE REGISTRO
-$.ajax({
-  url: './backend/cuenta-registro.php',
-  type: 'POST',
-  success: function(response){
-      console.log(response);
+//AGREGAR CUENTA Y USUARIO
+$('#addAccount').click(function () {
+  $.post('../backend/API/account.php', {
+    name: $('#name').val(),
+    lastname: $('#lastname').val(),
+    email: $('#email').val(),
+    account: $('#account').val(),
+    country: $('#country').val(),
+    card: $('#card').val(),
+    suscription: $('#suscription').val(),
+    user: $('#user').val(),
+    password: $('#password').val()
+  }, function (response) {
       let respuesta = JSON.parse(response);
-      alert("registro exitoso");
-  }
+      console.log(respuesta);
+  });
 });

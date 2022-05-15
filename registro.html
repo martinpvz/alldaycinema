@@ -18,7 +18,7 @@
 
   <main class="main-login">
     <h2 class="create-text">Crear cuenta</h2>
-    <form action="./backend/profile/profile-add.php" method="post" class="form-register">
+    <form action="./backend/account/newaccount.php" method="post" class="form-register">
       <div class="user-data__form name">
         <p>Nombre</p>
         <input type="text" name="name" id="name" required>
@@ -91,7 +91,7 @@
         <input type="password" name="password" id="password" required>
       </div>
       <div class="control-buttons">
-        <input type="submit" value="Guardar" class="button-register register-button" name="guardar">
+        <input type="submit" value="Guardar" class="button-register register-button" name="guardar" id="addAccount">
         <button type="button" class="button-register cancel-button" onclick="location.href = './index.html'">Cancelar</button>
       </div>
     </form>
