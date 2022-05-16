@@ -44,7 +44,7 @@ class Cuenta extends Database
                     if ($this->conexion->query($sql)) {
                         $this->response['estatus'] =  "Correcto";
                         $this->response['mensaje'] =  "El usuario se agregó correctamente";
-                        header("location:../../index.html");
+                        header("location:../../index.php");
                     } else {
                         $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
                     }
