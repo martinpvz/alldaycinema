@@ -27,6 +27,10 @@
         <p>Apellidos</p>
         <input type="text" name="lastname" id="lastname" required>
       </div>
+      <div class="user-data__form email">
+        <p>Correo</p>
+        <input type="email" name="email" id="email" required>
+      </div>
       <div class="user-data__form">
         <p class="choose">Tipo de cuenta</p>
           <div class="dropdown">
@@ -38,6 +42,7 @@
             <ul class="dropdown-menu">
               <li id="free">Free</li>
               <li id="premium">Premium</li>
+              <li id="premium">Familiar</li>
             </ul>
           </div>
       <span class="msg"></span>
@@ -72,7 +77,6 @@
             <input type="hidden" name="suscription">
             <ul class="dropdown-menu">
               <li id="month">Mensual</li>
-              <li id="semester">Semestral</li>
               <li id="anual">Anual</li>
             </ul>
           </div>

@@ -55,3 +55,19 @@ let editarPerfil = () => {
     document.getElementById("editarPerfil").onclick = editarPerfil;
   }
 }
+
+document.getElementById('perfil-main').onmouseover = () => {
+  document.getElementById('controles-main').style.display = "inherit";
+}
+document.getElementById('controles-main').onmouseleave = () => {
+  document.getElementById('controles-main').style.display = "none";
+}
+
+document.getElementById("search-main").onfocus = () => {
+  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0.4rem 0.25rem #ee6c4d)"
+  console.log('hola')
+}
+document.getElementById("search-main").onblur = () => {
+  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0 0 white)"
+  console.log('hola')
+}

@@ -392,6 +392,7 @@ div .delete-button {
   height: 100px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .selector-main {
   width: 90px;
@@ -402,13 +403,49 @@ div .delete-button {
   margin-left: 25px;
   transition: all 0.2s;
 }
+.go-search {
+  width: 200px;
+  border-bottom: 2px solid white;
+  margin-bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* box-shadow: 0 20px 12px 0px white; */
+  background-color: transparent;
+  /* filter: drop-shadow(0 0.4rem 0.25rem white); */
+}
+.go-search input {
+  padding-left: 20px;
+  background-color: transparent;
+  width: 220px;
+  outline: none;
+  color: white;
+  font-family: 'Lato';
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.go-search input::placeholder {
+  color: rgba(255, 255, 255, 0.815);
+  font-family: 'Lato';
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+body header .go-search:hover {
+  border-bottom: 2px solid #ee5622;
+  /* margin-bottom: -2px; */
+  width: 250px;
+}
 .selector-main img {
   width: 18px;
+}
+.go-search img {
+  margin-left: 15px;
 }
 .selector-main span {
   color: white;
   font-weight: bold;
   font-size: 1.6rem;
+  font-family: 'Lato';
 }
 .selector-main:hover {
   border-bottom: 2px solid white;
@@ -424,13 +461,170 @@ div .delete-button {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  cursor: pointer;
 }
 .profile-main span{
   color: white;
   font-weight: bold;
   font-size: 1.6rem;
+  font-family: 'Lato';
 }
 .profile-main img{
   width: 30px;
   border-radius: 50%;
 }
+.generos-main {
+  width: 90%;
+  margin: 0 auto 5px auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.genero-card {
+  width: 235px;
+  height: 150px;
+  border-radius: 8px;
+  margin: 40px 0 20px 0;
+  transition: transform .3s;
+}
+.genero-card:hover {
+  transform: scale(1.1);
+}
+.genero-card img {
+  width: 235px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.profile-controlers {
+  position: absolute;
+  z-index: 3;
+  right: 20px;
+  top: 80px;
+  width: 170px;
+  height: 120px;
+  background-color: #152840;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 6px;
+  overflow: hidden;
+  display:none;
+}
+.profile-controler {
+  width: 100%;
+  height: 100%;
+  /* cursor: pointer; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  transition: 0.2s;
+}
+.profile-controler p {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: 'Lato';
+}
+.profile-controler:hover {
+  background-color: #034154;
+}
+
+
+/* desde aqui empieza */
+.title-main {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  /* margin-left: 80px; */
+  margin-left: calc(50% - 520px);
+}
+
+.carousel2 {
+  width: 100%;
+  overflow: scroll;
+  padding: 5px;
+  position: relative;
+}
+
+.carousel2__container {
+  white-space: wrap;
+  margin: 10px auto 10px auto;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel2-item {
+  /* display: inline-block; */
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 450ms;
+  transform-origin: center left;
+}
+
+
+.carousel2-item:hover ~ .carousel2-item{
+  transform: translate3d(35px, 0, 0);
+}
+
+.carousel2__container:hover .carousel2-item {
+  opacity: 0.3;
+}
+
+.carousel2__container:hover .carousel2-item:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+::-webkit-scrollbar {
+  display: none; /* sirve para quitar el scroll blanco que aparece debajo del carrusel*/
+}
+
+.carousel-item__imagen {
+  width: 200px;
+  position: relative;
+}
+
+.carousel-item__details {
+  width: 100%;
+  display: none;
+  padding-left: 10px;
+  padding-bottom: 15px;
+  padding-top: 50px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  position: absolute;
+  transition: 450ms;
+  bottom: 0;
+}
+.carousel2-item:hover .carousel-item__details{
+  display: block;
+  /* transform: scale(1.1); */
+}
+
+.carousel-item__details div {
+  display: flex;
+}
+
+.carousel-item__details div > img {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.carousel-item__details--title {
+  font-size:medium;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.carousel-item__details--subtitle {
+  font-size: 10px;
+  color: white;
+}
+
+/* hasta aqui */
