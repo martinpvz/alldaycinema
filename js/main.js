@@ -62,35 +62,3 @@ document.getElementById('perfil-main').onmouseover = () => {
 document.getElementById('controles-main').onmouseleave = () => {
   document.getElementById('controles-main').style.display = "none";
 }
-
-document.getElementById("search-main").onfocus = () => {
-  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0.4rem 0.25rem #ee6c4d)"
-  console.log('hola')
-}
-document.getElementById("search-main").onblur = () => {
-  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0 0 white)"
-  console.log('hola')
-}
-
-//AGREGAR CUENTA Y USUARIO
-// $(document).ready(function () {
-//   $('#form-register').submit(function (e) {
-//     e.preventDefault();
-//     $.post('../backend/API/account.php', {
-//       name: $('#name').val(),
-//       lastname: $('#lastname').val(),
-//       email: $('#email').val(),
-//       account: $('#account').val(),
-//       country: $('#country').val(),
-//       card: $('#card').val(),
-//       suscription: $('#suscription').val(),
-//       user: $('#user').val(),
-//       password: $('#password').val()
-//     }, function (response) {
-//         let respuesta = JSON.parse(response);
-//         alert(respuesta)
-//         //console.log(respuesta);
-//     });
-//   });
-// });
-
