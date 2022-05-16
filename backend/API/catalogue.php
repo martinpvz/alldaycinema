@@ -225,6 +225,50 @@ class Catalogo extends DataBase
         }
     }
 
+    public function searchAdmin($get)
+    {
+        $this->response = array();
+        if (isset($get['search'])) {
+            $sql = "
+                SELECT * FROM (
+                    SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, r.descripcion, g.nombre AS genero, c.clave AS clasificacion, c.publico, p.lanzamiento, p.titulo, p.rutaPortada AS imagen, p.eliminado
+                    FROM peliculas AS p
+                    LEFT JOIN regiones AS r ON p.idgenero = r.idregion
+                    LEFT JOIN generos AS g ON p.idgenero = g.idgenero
+                    LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
+                    UNION
+                    SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave AS region, r.descripcion, g.nombre AS genero, c.clave AS clasificacion, c.publico, s.lanzamiento, s.titulo, s.rutaPortada AS imagen, s.eliminado
+                    FROM series AS s 
+                    LEFT JOIN regiones AS r ON s.idgenero = r.idregion
+                    LEFT JOIN generos AS g ON s.idgenero = g.idgenero
+                    LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
+                )contenido 
+                WHERE id = '{$get['search']}' 
+                    OR region LIKE '%{$get['search']}%' 
+                    OR descripcion LIKE '%{$get['search']}%' 
+                    OR genero LIKE '%{$get['search']}%' 
+                    OR clasificacion LIKE '%{$get['search']}%' 
+                    OR publico LIKE '%{$get['search']}%' 
+                    OR lanzamiento LIKE '%{$get['search']}%' 
+                    OR titulo LIKE '%{$get['search']}%'
+                ";
+            if ($result = $this->conexion->query($sql)) {
+                $rows = $result->fetch_all(MYSQLI_ASSOC);
+                if (!is_null($rows)) {
+                    foreach ($rows as $num => $row) {
+                        foreach ($row as $key => $value) {
+                            $this->response[$num][$key] = $value;
+                        }
+                    }
+                }
+                $result->free();
+            } else {
+                die('No se pudo completar la operación');
+            }
+            $this->conexion->close();
+        }
+    }
+
     public function single($post){
         $id = $post['id'];
         $tipo = $post['tipo'];

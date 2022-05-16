@@ -18,13 +18,16 @@ $(document).ready(function () {
         $('#form-seasons').hide();
         $('#form-chapters').hide();
         $('#btn-agregar').hide();
+        $('#btn-cancelar').hide();
     }
     
     //MUESTRA LOS CAMPOS CORRESPONDIENTES PARA AGREGAR UNA PELÍCULA
     $('#link-movies').click(function (e) {
+        $('#status-bar').hide();
         edit = false;
         resetForm();
         $('#btn-agregar').text("Agregar Película");
+        $('#btn-cancelar').show();
         tipoElemento= "Pelicula";
         e.preventDefault();
         $('#form-seasons').hide();
@@ -42,9 +45,11 @@ $(document).ready(function () {
 
     //MUESTRA LOS CAMPOS CORRESPONDIENTES PARA AGREGAR UNA SERIE
     $('#link-series').click(function (e) {
+        $('#status-bar').hide();
         edit = false;
         resetForm();
         $('#btn-agregar').text("Agregar Serie");
+        $('#btn-cancelar').show();
         tipoElemento= "Serie";
         e.preventDefault();
         $('#form-region').show();
@@ -63,6 +68,7 @@ $(document).ready(function () {
 
     //FUNCIÓN QUE PERMITE EDITAR O AGREGAR SEGÚN SEA EL CASO
     $('#movies-form').submit(function (e) {
+        $('#status-bar').hide();
         e.preventDefault();
         if(edit === false)
         {
@@ -82,6 +88,7 @@ $(document).ready(function () {
                     console.log(response);
                     let respuesta = JSON.parse(response);
                     console.log(respuesta);
+                    plantilla(respuesta.mensaje);
                 });          
             }
             else
@@ -101,6 +108,7 @@ $(document).ready(function () {
                     //console.log(response);
                     let respuesta = JSON.parse(response);
                     console.log(respuesta);
+                    plantilla(respuesta.mensaje);
                 });
             }
             listarCatalogo();
@@ -124,6 +132,7 @@ $(document).ready(function () {
                     //console.log(response);
                     let respuesta = JSON.parse(response);
                     console.log(respuesta);
+                    plantilla(respuesta.mensaje);
                 });
             }
             else
@@ -144,6 +153,7 @@ $(document).ready(function () {
                     //console.log(response);
                     let respuesta = JSON.parse(response);
                     console.log(respuesta);
+                    plantilla(respuesta.mensaje);
                 });
             }
             listarCatalogo();
@@ -158,6 +168,8 @@ $(document).ready(function () {
     }
     //EVENTO CLICK DEL BOTON EDITAR
     $(document).on('click', '#btn-editar', function () {
+        $('#status-bar').hide();
+        $('#btn-cancelar').show();
         let elemento = $(this)[0].parentElement.parentElement;
         //console.log(elemento);
         let id = $(elemento).attr('contenidoId');
@@ -231,6 +243,7 @@ $(document).ready(function () {
     });
     //EVENTO CLICK DEL BOTON ELIMINAR
     $(document).on('click', '#btn-eliminar', function () {
+        $('#status-bar').hide();
         let elemento = $(this)[0].parentElement.parentElement;
         console.log(elemento);
         let id = $(elemento).attr('contenidoId');
@@ -244,11 +257,99 @@ $(document).ready(function () {
             }, function (response) {
                 //console.log(response);
                 let contenido = JSON.parse(response);
-                console.log(contenido); 
+                console.log(contenido);
+                plantilla(contenido.mensaje);
             });
-            listarCatalogo();
         }
+        listarCatalogo();
     });
+
+
+    //FUNCIÓN PARA BUSCAR
+    $('#search').keyup(function (e) {
+        $('#status-bar').hide();
+        hideForm();
+        if($('#search').val())
+        {
+            let search = $('#search').val();
+            $.ajax({
+                url: './backend/catalogue/catalogue-searchAdmin.php',
+                type: 'GET',
+                data: {
+                    search
+                },
+                success: function (response) {
+                    let peliculas = JSON.parse(response);
+                    console.log(peliculas);
+                    if (Object.keys(peliculas).length > 0) {
+                        let template = '';
+                        peliculas.forEach(pelicula => {
+                            let disponible = "Sí";
+                            if(pelicula.eliminado == 1)
+                            {
+                                disponible = "No";
+                            }
+                            let descripcion = '';
+                            descripcion += '<li>Tipo: ' + pelicula.tipo + '</li>';
+                            descripcion += '<li>Región: ' + pelicula.region + '</li>';
+                            descripcion += '<li>Clasificación: ' + pelicula.clasificacion + '</li>';
+                            descripcion += '<li>Lanzamiento: ' + pelicula.lanzamiento + '</li>';
+                            descripcion += '<li>Género: ' + pelicula.genero + '</li>';
+                            descripcion += '<li>Disponible: ' + disponible + '</li>';
+                            descripcion += '<li>Ruta imagen: ' + pelicula.imagen + '</li>';
+    
+                            template += `
+                                <tr contenidoId="${pelicula.id}" contenidoTipo="${pelicula.tipo}">
+                                    <td>${pelicula.id}</td>
+                                    <td>${pelicula.titulo}</td>
+                                    <td><ul>${descripcion}</ul></td>
+                                    <td>
+                                        <button class=" btn btn-primary" id="btn-editar">
+                                            Editar
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" id="btn-eliminar">
+                                        Eliminar
+                                        </button>                                
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        $('#peliculas').html(template);
+                    }
+                    // else
+                    // {
+                    //     listarCatalogo();
+                    // }
+                }
+            })
+        }
+
+    })
+
+    //FUNCIÓN PARA BOTÓN CANCELAR
+    $(document).on('click', '#btn-cancelar', function () {
+        hideForm();
+    });
+
+    function plantilla(string) {
+
+        let template_bar = '';
+    
+        template_bar += `
+    
+        <li style="list-style: none;">Estatus:</li>
+    
+        <li style="list-style: none;">${string}</li>
+    
+        `;
+    
+        $('#status-bar').show();
+    
+        $('#status').html(template_bar);
+    
+    }
 
     function listarCatalogo() {
         $.ajax({
@@ -257,7 +358,6 @@ $(document).ready(function () {
             success: function (response) {
                 //console.log(response);
                 let peliculas = JSON.parse(response);
-                
                 if (Object.keys(peliculas).length > 0) {
                     let template = '';
                     peliculas.forEach(pelicula => {
@@ -299,5 +399,6 @@ $(document).ready(function () {
         });
         console.log("prueba");
     }
+
 });
 

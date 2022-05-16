@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminHome</title>
     <!-- BOOTSTRAP 4  -->
-    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
 </head>
 
 <body>
@@ -13,7 +14,7 @@
 <!-- BARRA DE NAVEGACIÓN  -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <img src="./img/alldaycinema2_blanco.png" alt="Logo de imagen" width="100px" >
-    <a class="navbar-brand" href=".">AdminHome</a>
+    <a class="navbar-brand" style="padding-left: 20px;" href="./homeAdmin_Peliculas.html">AdminHome</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,9 +23,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto"></ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" name="search" id="search" type="search"
+            <input class="form-control mr-sm-2 " name="search" id="search" type="search"
                 placeholder="Título, clasificación, género..." aria-label="Search">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+            <!-- <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button> -->
+            <img src="./img/search.png" alt="Buscar" width="30px">
         </form>
     </div>
 </nav>
@@ -32,10 +34,10 @@
 <div class="container">
     <div class="row p-4">
         <div class="col-md-5">
-            <div class="card">
+            <div class="card bg-secondary mb-3">
                 <div class="card-body">
-                    <a  href="#" style="font-size: 1.4rem; margin-right: 20px;" id="link-movies"> Agregar Películas</a>
-                    <a href="#" style="font-size: 1.4rem;" id="link-series"> Agregar Series</a>
+                    <a  href="#" style="font-size: 1.4rem; margin-right: 10px;" id="link-movies" class="btn btn-sm btn-primary"> Agregar Películas</a>
+                    <a href="#" style="font-size: 1.4rem;" id="link-series" class="btn btn-sm btn-primary"> Agregar Series</a>
                     <!-- FORMULARIO PARA AGREGAR O EDITAR PELICULAS-->
                     <form id="movies-form">
                         <div class="form-group">
@@ -60,7 +62,7 @@
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="image" id="form-image" onBlur=""
-                                placeholder="Ruta imagen" required>
+                                placeholder="Ruta imagen" value ="/img/default.jpg" required>
                         </div>
                         <div class="form-group">
                             <select class="form-select form-control" aria-label="Default select example"
@@ -124,6 +126,10 @@
                             id="btn-agregar">
                             Agregar
                         </button>
+                        <button class="btn btn-danger btn-block text-center" type="reset" onBlur=""
+                        id="btn-cancelar">
+                        Cancelar
+                    </button>
                     </form>
                 </div>
             </div>
@@ -134,7 +140,7 @@
                 <div class="card my-4" id="status-bar">
                     <div class="card-body">
                         <!-- RESULTADO -->
-                        <ul id="estatus"></ul>
+                        <ul id="status"></ul>
                     </div>
                 </div>
                 <table class="table table-bordered table-sm">
