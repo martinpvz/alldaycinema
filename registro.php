@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 
   <main class="main-login">
     <h2 class="create-text">Crear cuenta</h2>
-    <form action="" method="post" class="form-register">
+    <form action="./backend/account/newaccount.php" method="post" class="form-register">
       <div class="user-data__form name">
         <p>Nombre</p>
         <input type="text" name="name" id="name" required>
@@ -40,9 +40,9 @@
             </div>
             <input type="hidden" name="account">
             <ul class="dropdown-menu">
-              <li id="free">Free</li>
-              <li id="premium">Premium</li>
-              <li id="premium">Familiar</li>
+              <li id="0">Free</li>
+              <li id="1">Premium</li>
+              <li id="2">Familiar</li>
             </ul>
           </div>
       <span class="msg"></span>
@@ -54,7 +54,7 @@
               <span>Selecciona país</span>
               <i class="fa fa-chevron-left"></i>
             </div>
-            <input type="hidden" name="account">
+            <input type="hidden" name="country">
             <ul class="dropdown-menu">
               <li id="mx">México</li>
               <li id="us">Estados Unidos</li>
@@ -76,8 +76,8 @@
             </div>
             <input type="hidden" name="suscription">
             <ul class="dropdown-menu">
-              <li id="month">Mensual</li>
-              <li id="anual">Anual</li>
+              <li id="0">Mensual</li>
+              <li id="1">Anual</li>
             </ul>
           </div>
       <span class="msg"></span>
@@ -91,8 +91,8 @@
         <input type="password" name="password" id="password" required>
       </div>
       <div class="control-buttons">
-        <input type="submit" value="Guardar" class="button-register register-button">
-        <button type="button" class="button-register cancel-button" onclick="location.href = './index.html'">Cancelar</button>
+        <input type="submit" value="Guardar" class="button-register register-button" name="guardar" id="addAccount">
+        <button type="button" class="button-register cancel-button" onclick="location.href = './index.php'">Cancelar</button>
       </div>
     </form>
 
@@ -101,6 +101,6 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-  <script src="./main.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>

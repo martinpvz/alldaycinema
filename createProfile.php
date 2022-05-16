@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['sesion']) != true) {
+  header("location:./index.php"); 
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear perfil</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -19,7 +25,7 @@
   <main class="main-login edit-profile">
     <h2 class="create-text">Crear perfil</h2>
     <div class="form-edit">
-      <form action="" method="post" class="form-register--edit">
+      <form action="./backend/profile/profile-add.php" method="post" class="form-register--edit">
         <div class="user-data__form user">
           <p>Usuario</p>
           <input type="text" name="user" id="user" required>
@@ -49,7 +55,7 @@
         </div>
         <div class="control-buttons">
           <input type="submit" value="Guardar" class="button-register register-button">
-          <button type="button" class="button-register cancel-button" onclick="location.href = './profiles.html'">Cancelar</button>
+          <button type="button" class="button-register cancel-button" onclick="location.href = './profiles.php'">Cancelar</button>
         </div>
       </form>
       <div class="image-edit__container">
@@ -62,6 +68,6 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-  <script src="./main.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>
