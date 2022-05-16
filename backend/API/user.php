@@ -12,10 +12,10 @@ class User extends DataBase
         parent::__construct($string);
     }
 
-    // public function getResponse()
-    // {
-    //     return json_encode($this->response, JSON_PRETTY_PRINT);
-    // }
+    public function getResponse()
+    {
+        return json_encode($this->response, JSON_PRETTY_PRINT);
+    }
 
     public function validate($post)
     {

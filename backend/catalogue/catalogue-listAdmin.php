@@ -7,6 +7,6 @@ require_once '../API/catalogue.php';
 
 $var = new Catalogo();
 
-$var->addPelicula($_POST);
+$var->listAdmin();
 
 echo $var->getResponse();

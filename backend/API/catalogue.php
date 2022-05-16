@@ -38,7 +38,6 @@ class Catalogo extends DataBase
             LEFT JOIN regiones AS r ON s.idgenero = r.idregion
             LEFT JOIN generos AS g ON s.idgenero = g.idgenero
             LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
-            WHERE s.eliminado = 0
             ";
         } elseif($get['type'] == "Acción") {
             $sql = "
@@ -129,68 +128,95 @@ class Catalogo extends DataBase
         $this->conexion->close();
     }
 
-    public function addPelicula($post)
+    public function listAdmin()
     {
-        $this->response = array(
-            'estatus'  => 'Error',
-            'mensaje' => 'La película ya existe en la base de datos'
-        );
+        $this->response = array();
+        $sql = "
+            SELECT p.idpelicula AS id, concat('Pelicula') AS tipo, r.clave AS region, g.nombre AS genero, c.clave AS clasificacion, p.lanzamiento, p.titulo, p.eliminado, p.rutaPortada as imagen
+            FROM peliculas AS p 
+            LEFT JOIN regiones AS r ON p.idgenero = r.idregion
+            LEFT JOIN generos AS g ON p.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON p.idclasificacion = c.idclasificacion
+            UNION
+            SELECT s.idserie AS id, concat('Serie') AS tipo, r.clave, g.nombre, c.clave, s.lanzamiento, s.titulo, s.eliminado, s.rutaPortada as imagen
+            FROM series AS s 
+            LEFT JOIN regiones AS r ON s.idgenero = r.idregion
+            LEFT JOIN generos AS g ON s.idgenero = g.idgenero
+            LEFT JOIN clasificaciones AS c ON s.idclasificacion = c.idclasificacion
+            ";
 
-        if (isset($post['titulo'])) {
-            $sql = "
-                SELECT * FROM peliculas WHERE titulo = '{$post['titulo']}'
-                ";
-            $result = $this->conexion->query($sql);
-            if ($result->num_rows == 0) {
-                $this->conexion->set_charset("utf8");
-
-                $sql = "
-                    INSERT INTO peliculas (idpelicula, idregion, idgenero, idclasificacion, lanzamiento, titulo, duracion, rutaPortada) VALUES
-                    (null, '{$post['region']}', '{$post['genero']}', '{$post['clasificacion']}', '{$post['lanzamiento']}', '{$post['titulo']}', '{$post['duracion']}', '{$post['imagen']}')
-                    ";
-
-                if ($this->conexion->query($sql)) {
-                    $this->response['estatus'] =  "Correcto";
-                    $this->response['mensaje'] =  "La película se agregó correctamente";
-                } else {
-                    $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
+        if ($result = $this->conexion->query($sql)) {
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            if (!is_null($rows)) {
+                foreach ($rows as $num => $row) {
+                    foreach ($row as $key => $value) {
+                        $this->response[$num][$key] = $value;
+                    }
                 }
             }
             $result->free();
-            $this->conexion->close();
+        } else {
+            die('No se pudo completar la operación');
         }
+        $this->conexion->close();
     }
 
-    public function addSerie($post)
+    public function add($post)
     {
         $this->response = array(
             'estatus'  => 'Error',
-            'mensaje' => 'La serie ya existe en la base de datos'
+            'mensaje' => 'El elemento ya existe en la base de datos'
         );
-
-        if (isset($post['titulo'])) {
-            $sql = "
-                SELECT * FROM series WHERE titulo = '{$post['titulo']}'
-                ";
-            $result = $this->conexion->query($sql);
-            if ($result->num_rows == 0) {
-                $this->conexion->set_charset("utf8");
-
+        if($post['tipoElemento'] == 'Pelicula')
+        {
+            if (isset($post['title'])) {
                 $sql = "
-                    INSERT INTO series (idserie, idregion, idgenero, idclasificacion, lanzamiento, titulo, numTemporadas, totalCapitulos, rutaPortada) VALUES
-                    (null, '{$post['region']}', '{$post['genero']}', '{$post['clasificacion']}', '{$post['lanzamiento']}', '{$post['titulo']}', '{$post['temporadas']}', '{$post['capitulos']}', '{$post['imagen']}')
+                    SELECT * FROM peliculas WHERE titulo = '{$post['title']}'
                     ";
-
-                if ($this->conexion->query($sql)) {
-                    $this->response['estatus'] =  "Correcto";
-                    $this->response['mensaje'] =  "La serie se agregó correctamente";
-                } else {
-                    $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
+                $result = $this->conexion->query($sql);
+                if ($result->num_rows == 0) {
+                    $this->conexion->set_charset("utf8");
+    
+                    $sql = "
+                        INSERT INTO peliculas (idpelicula, idregion, idgenero, idclasificacion, lanzamiento, titulo, duracion, rutaPortada) VALUES
+                        (null, '{$post['region']}', '{$post['genre']}', '{$post['clasification']}', '{$post['year']}', '{$post['title']}', '{$post['duration']}', '{$post['image']}')
+                        ";
+    
+                    if ($this->conexion->query($sql)) {
+                        $this->response['estatus'] =  "Correcto";
+                        $this->response['mensaje'] =  "La película se agregó correctamente";
+                    } else {
+                        $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
+                    }
                 }
-            }
-            $result->free();
-            $this->conexion->close();
+                $result->free();
+            }    
         }
+        else{
+            if (isset($post['title'])) {
+                $sql = "
+                    SELECT * FROM series WHERE titulo = '{$post['title']}'
+                    ";
+                $result = $this->conexion->query($sql);
+                if ($result->num_rows == 0) {
+                    $this->conexion->set_charset("utf8");
+    
+                    $sql = "
+                        INSERT INTO series (idserie, idregion, idgenero, idclasificacion, lanzamiento, titulo, numTemporadas, totalCapitulos, rutaPortada) VALUES
+                        (null, '{$post['region']}', '{$post['genre']}', '{$post['clasification']}', '{$post['year']}', '{$post['title']}', '{$post['seasons']}', '{$post['chapters']}', '{$post['image']}')
+                        ";
+    
+                    if ($this->conexion->query($sql)) {
+                        $this->response['estatus'] =  "Correcto";
+                        $this->response['mensaje'] =  "La serie se agregó correctamente";
+                    } else {
+                        $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
+                    }
+                }
+                $result->free();
+            }            
+        }
+        $this->conexion->close();
     }
 
     public function edit($post)
@@ -200,9 +226,9 @@ class Catalogo extends DataBase
             'mensaje' => 'La película o serie no existe en la base de datos'
         );
         if (isset($post['id'])) {
-            if ($post['tipo'] == 'Pelicula') {
+            if ($post['tipoElemento'] == 'Pelicula') {
                 $sql = "
-                    UPDATE peliculas SET idregion = '{$post['region']}', idgenero = '{$post['genero']}', idclasificacion ='{$post['clasificacion']}', lanzamiento = '{$post['lanzamiento']}', titulo = '{$post['titulo']}', duracion = '{$post['duracion']}', rutaPortada = '{$post['imagen']}', eliminado = '{$post['eliminado']}' WHERE idpelicula = '{$post['id']}'
+                    UPDATE peliculas SET idregion = '{$post['region']}', idgenero = '{$post['genre']}', idclasificacion ='{$post['clasification']}', lanzamiento = '{$post['year']}', titulo = '{$post['title']}', duracion = '{$post['duration']}', rutaPortada = '{$post['image']}', eliminado = '{$post['available']}' WHERE idpelicula = '{$post['id']}'
                     ";
                 $this->conexion->set_charset("utf8");
                 if ($this->conexion->query($sql)) {
@@ -213,7 +239,7 @@ class Catalogo extends DataBase
                 }
             } else {
                 $sql = "
-                UPDATE series SET idregion = '{$post['region']}', idgenero = '{$post['genero']}', idclasificacion ='{$post['clasificacion']}', lanzamiento = '{$post['lanzamiento']}', titulo = '{$post['titulo']}', numTemporadas = '{$post['temporadas']}', totalCapitulos = '{$post['capitulos']}', rutaPortada = '{$post['imagen']}', eliminado = '{$post['eliminado']}' WHERE idserie = '{$post['id']}'
+                UPDATE series SET idregion = '{$post['region']}', idgenero = '{$post['genre']}', idclasificacion ='{$post['clasification']}', lanzamiento = '{$post['year']}', titulo = '{$post['title']}', numTemporadas = '{$post['seasons']}', totalCapitulos = '{$post['chapters']}', rutaPortada = '{$post['image']}', eliminado = '{$post['available']}' WHERE idserie = '{$post['id']}'
                     ";
                 $this->conexion->set_charset("utf8");
                 if ($this->conexion->query($sql)) {
@@ -306,5 +332,56 @@ class Catalogo extends DataBase
             }
             $this->conexion->close();
         }
+    }
+
+    public function single($post){
+        $id = $post['id'];
+        $tipo = $post['tipo'];
+        if($tipo == 'Pelicula'){
+            $query = "SELECT * FROM peliculas WHERE idpelicula = $id";
+            $result = mysqli_query($this->conexion, $query);
+            if(!$result){
+                die('Query fallida.');
+            }        
+            $this->response = array();
+            while($row = mysqli_fetch_array($result)){
+                $this->response = array(
+                    'id' => $row['idpelicula'],
+                    'region' => $row['idregion'],
+                    'genero' => $row['idgenero'],
+                    'clasificacion' => $row['idclasificacion'],
+                    'lanzamiento' => $row['lanzamiento'],
+                    'titulo' => $row['titulo'],
+                    'duracion' => $row['duracion'],
+                    'imagen' => $row['rutaPortada'],
+                    'eliminado' => $row['eliminado']
+                );      
+            }
+        }
+        else
+        {
+            $query = "SELECT * FROM series WHERE idserie = $id";
+            $result = mysqli_query($this->conexion, $query);
+            if(!$result){
+                die('Query fallida.');
+            }
+        
+            $this->response = array();
+            while($row = mysqli_fetch_array($result)){
+                $this->response = array(
+                    'id' => $row['idserie'],
+                    'region' => $row['idregion'],
+                    'genero' => $row['idgenero'],
+                    'clasificacion' => $row['idclasificacion'],
+                    'lanzamiento' => $row['lanzamiento'],
+                    'titulo' => $row['titulo'],
+                    'temporadas' => $row['numTemporadas'],
+                    'capitulos' => $row['totalCapitulos'],
+                    'imagen' => $row['rutaPortada'],
+                    'eliminado' => $row['eliminado']
+                );      
+            }
+        }
+
     }
 }

@@ -7,4 +7,5 @@ require_once '../API/user.php';
 $var = new User();
 
 $var->validate($_POST);
+echo $var->getResponse();
 ?>

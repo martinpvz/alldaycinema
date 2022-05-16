@@ -143,8 +143,3 @@ document.getElementById('perfil-main').onmouseover = () => {
 document.getElementById('controles-main').onmouseleave = () => {
   document.getElementById('controles-main').style.display = "none";
 }
-
-// document.getElementById("search-main").onfocus = () => {
-//   document.getElementById("buscador-div").style.filter = "drop-shadow(0 0.4rem 0.25rem #ee6c4d)"
-//   console.log('hola')
-// }
