@@ -24,19 +24,23 @@ class User extends DataBase
         $_SESSION['user'] = $post['user'];
         
         //Consulta
-        $sql = "SELECT * FROM usuarios WHERE user='{$post['user']}' and pass='{$post['password']}'";
-        $result = mysqli_query($this->conexion,$sql);
+        $sqlAdmin = "SELECT * FROM usuarios WHERE user='{$post['user']}' and pass='{$post['password']}' and nivel = '0'";
+        $sqlUser = "SELECT * FROM usuarios WHERE user='{$post['user']}' and pass='{$post['password']}' and nivel = '1'";
+        $resultAdmin = mysqli_query($this->conexion,$sqlAdmin);
+        $resultUser = mysqli_query($this->conexion,$sqlUser);
         
-        $filas = mysqli_num_rows($result);
+        $filasAdmin = $resultAdmin->fetch_all(MYSQLI_ASSOC);;
+        $filasUser = $resultUser->fetch_all(MYSQLI_ASSOC);;
         
-        if($filas){
+        if($filasUser){
             header("location:../../profiles.php?email=" . $_POST['email']); 
         }
-        else{
-            //REVISAR MENSAJE DE FALLO DE CONEXIÓN
+        else if($filasAdmin){
+            header("location:../../homeAdmin_Peliculas.php"); 
+        } else {
             header("location:../../index.php"); 
         }
-        mysqli_free_result($result);
+        mysqli_free_result($resultAdmin);
         mysqli_close($this->conexion);       
     }
 }
