@@ -7,6 +7,6 @@ require_once '../API/catalogue.php';
 
 $var = new Catalogo();
 
-$var->addSerie($_POST);
+$var->add($_POST);
 
 echo $var->getResponse();
