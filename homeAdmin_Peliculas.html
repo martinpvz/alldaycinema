@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home|Peliculas</title>
+    <title>AdminHome</title>
     <!-- BOOTSTRAP 4  -->
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
 </head>
@@ -12,7 +12,8 @@
 
 <!-- BARRA DE NAVEGACIÓN  -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href=".">Home</a>
+    <img src="./img/alldaycinema2_blanco.png" alt="Logo de imagen" width="100px" >
+    <a class="navbar-brand" href=".">AdminHome</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,11 +34,12 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
+                    <a  href="#" style="font-size: 1.4rem; margin-right: 20px;" id="link-movies"> Agregar Películas</a>
+                    <a href="#" style="font-size: 1.4rem;" id="link-series"> Agregar Series</a>
                     <!-- FORMULARIO PARA AGREGAR O EDITAR PELICULAS-->
                     <form id="movies-form">
-                        <h3>Peliculas</h3>
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="idMovies" id="form-id"
+                            <input type="hidden" class="form-control" name="id" id="form-id"
                                 placeholder="Id" readonly></li>
                         </div>
                         <div class="form-group">
@@ -58,22 +60,22 @@
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="image" id="form-image" onBlur=""
-                                placeholder="Imagen" required>
+                                placeholder="Ruta imagen" required>
                         </div>
                         <div class="form-group">
                             <!-- <input list="region" class="form-control"name="region" id="form-region" onBlur="" placeholder="Región" required> -->
                             <select class="form-select form-control" aria-label="Default select example"
                                 name="region" id="form-region" onBlur="" required>
                                 <option hidden selected>Región</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="1">0</option>
+                                <option value="2">1</option>
+                                <option value="3">2</option>
+                                <option value="4">3</option>
+                                <option value="5">4</option>
+                                <option value="6">5</option>
+                                <option value="7">6</option>
+                                <option value="8">7</option>
+                                <option value="9">8</option>
                             </select>
                         </div>
 
@@ -111,7 +113,7 @@
                         </div>
                         <div class="form-group">
                             <!-- <input list="available" class="form-control" name="available" id="form-available" onBlur="" placeholder="Disponible"> -->
-                            <select id="available" class="form-select form-control"
+                            <select class="form-select form-control"
                                 aria-label="Default select example" name="available" id="form-available"
                                 onBlur="" required>
                                 <option hidden selected>Disponible</option>

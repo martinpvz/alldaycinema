@@ -84,7 +84,7 @@ class Catalogo extends DataBase
             }    
         }
         else{
-            if (isset($post['titulo'])) {
+            if (isset($post['title'])) {
                 $sql = "
                     SELECT * FROM series WHERE titulo = '{$post['title']}'
                     ";
@@ -110,38 +110,6 @@ class Catalogo extends DataBase
         $this->conexion->close();
     }
 
-    // public function addSerie($post)
-    // {
-    //     $this->response = array(
-    //         'estatus'  => 'Error',
-    //         'mensaje' => 'La serie ya existe en la base de datos'
-    //     );
-
-    //     if (isset($post['titulo'])) {
-    //         $sql = "
-    //             SELECT * FROM series WHERE titulo = '{$post['title']}'
-    //             ";
-    //         $result = $this->conexion->query($sql);
-    //         if ($result->num_rows == 0) {
-    //             $this->conexion->set_charset("utf8");
-
-    //             $sql = "
-    //                 INSERT INTO series (idserie, idregion, idgenero, idclasificacion, lanzamiento, titulo, numTemporadas, totalCapitulos, rutaPortada) VALUES
-    //                 (null, '{$post['region']}', '{$post['genre']}', '{$post['clasification']}', '{$post['year']}', '{$post['title']}', '{$post['seasons']}', '{$post['chapters']}', '{$post['image']}')
-    //                 ";
-
-    //             if ($this->conexion->query($sql)) {
-    //                 $this->response['estatus'] =  "Correcto";
-    //                 $this->response['mensaje'] =  "La serie se agregó correctamente";
-    //             } else {
-    //                 $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
-    //             }
-    //         }
-    //         $result->free();
-    //         $this->conexion->close();
-    //     }
-    // }
-
     public function edit($post)
     {
         $this->response = array(
@@ -149,7 +117,7 @@ class Catalogo extends DataBase
             'mensaje' => 'La película o serie no existe en la base de datos'
         );
         if (isset($post['id'])) {
-            if ($post['tipo'] == 'Pelicula') {
+            if ($post['tipoElemento'] == 'Pelicula') {
                 $sql = "
                     UPDATE peliculas SET idregion = '{$post['region']}', idgenero = '{$post['genre']}', idclasificacion ='{$post['clasification']}', lanzamiento = '{$post['year']}', titulo = '{$post['title']}', duracion = '{$post['duration']}', rutaPortada = '{$post['image']}', eliminado = '{$post['available']}' WHERE idpelicula = '{$post['id']}'
                     ";
@@ -260,7 +228,6 @@ class Catalogo extends DataBase
     public function single($post){
         $id = $post['id'];
         $tipo = $post['tipo'];
-        //echo $tipo;
         if($tipo == 'Pelicula'){
             $query = "SELECT * FROM peliculas WHERE idpelicula = $id";
             $result = mysqli_query($this->conexion, $query);
