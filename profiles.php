@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(isset($_SESSION['sesion']) != true) {
+  header("location:./index.php"); 
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,23 +26,8 @@
 
   <main class="main-login">
     <h2 class="create-text" id="create-text">¿Quién eres?</h2>
-    <div class="profiles">
-      <a href="./mainPage.html" class="profile">
-        <img src="./img/perfil.png" alt="Foto perfil" class="profile-image">
-        <p class="profile-name">nombrePerfil</p>
-        <img src="./img/edit.png" alt="Editar perfil" class="edit-image">
-      </a>
-      <a href="./mainPage.html" class="profile">
-        <img src="./img/perfil.png" alt="Foto perfil" class="profile-image">
-        <p class="profile-name">nombrePerfil</p>
-        <img src="./img/edit.png" alt="Editar perfil" class="edit-image">
-      </a>
-      <a href="./mainPage.html" class="profile">
-        <img src="./img/perfil.png" alt="Foto perfil" class="profile-image">
-        <p class="profile-name">nombrePerfil</p>
-        <img src="./img/edit.png" alt="Editar perfil" class="edit-image">
-      </a>
-      <a href="./createProfile.html" class="add-profile" id="add-profile">
+    <div class="profiles" id="profiles-list">
+      <a href="./createProfile.php" class="add-profile" id="add-profile">
         <img src="./img/add.png" alt="Añadir perfil">
       </a>
     </div>
@@ -44,6 +36,6 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-  <script src="./js/main.js"></script>
+  <script src="./js/profiles.js"></script>
 </body>
 </html>

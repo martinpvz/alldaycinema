@@ -10,3 +10,5 @@ $var = new Perfiles();
 $var->list($_GET);
 
 echo $var->getResponse();
+
+?>

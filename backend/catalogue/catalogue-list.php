@@ -7,6 +7,6 @@ require_once '../API/catalogue.php';
 
 $var = new Catalogo();
 
-$var->list();
+$var->list($_GET);
 
 echo $var->getResponse();

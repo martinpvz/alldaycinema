@@ -92,7 +92,7 @@
       </div>
       <div class="control-buttons">
         <input type="submit" value="Guardar" class="button-register register-button" name="guardar" id="addAccount">
-        <button type="button" class="button-register cancel-button" onclick="location.href = './index.html'">Cancelar</button>
+        <button type="button" class="button-register cancel-button" onclick="location.href = './index.php'">Cancelar</button>
       </div>
     </form>
 

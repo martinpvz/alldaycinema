@@ -20,6 +20,7 @@ class User extends DataBase
     public function validate($post)
     {
         session_start();
+        $_SESSION['sesion'] = true;
         $_SESSION['user'] = $post['user'];
         
         //Consulta
@@ -29,11 +30,11 @@ class User extends DataBase
         $filas = mysqli_num_rows($result);
         
         if($filas){
-            header("location:../../profiles.html"); 
+            header("location:../../profiles.php?email=" . $_POST['email']); 
         }
         else{
             //REVISAR MENSAJE DE FALLO DE CONEXIÓN
-            header("location:../../index.html"); 
+            header("location:../../index.php"); 
         }
         mysqli_free_result($result);
         mysqli_close($this->conexion);       

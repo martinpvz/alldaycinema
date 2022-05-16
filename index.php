@@ -19,7 +19,7 @@
   </header>
 
   <main class="main-login">
-    <form action="./backend/user/user-login.php" method="post" class="form-login">
+    <form action="./backend/user/user-login.php" method="post" class="form-login" id="form-sesion">
       <div class="user-data user">
         <p>Usuario</p>
         <input type="text" name="user" id="user" required>
@@ -28,12 +28,12 @@
         <p>Contraseña</p>
         <input type="password" name="password" id="password" required>
       </div>
-      <input type="submit" value="Iniciar sesión" class="login-button" id="login">
+      <input type="submit" value="Iniciar sesión" class="login-button" id="iniciar-sesion">
     </form>
 
     <div class="register">
       <span>¿Aún no tienes cuenta?</span>
-      <a href="./registro.html" class="register-link">Regístrate</a>
+      <a href="./registro.php" class="register-link">Regístrate</a>
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"

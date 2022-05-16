@@ -5,12 +5,12 @@ namespace DataBase;
 use DataBase\DataBase;
 
 require_once __DIR__ . '/database.php';
-
+session_start();
 class Perfiles extends DataBase
 {
     public function __construct($string = 'vod')
     {
-        $this->response = "";
+        $this->response;
         parent::__construct($string);
     }
 
@@ -21,17 +21,20 @@ class Perfiles extends DataBase
 
     public function list($get)
     {
-        $this->response = array();
+        $data = array();
+        $user = $_SESSION['user'];
+        // $idCuenta = $this->conexion->query("SELECT idCuenta FROM usuarios WHERE user = '$user'")
+        // echo $user;
+        // $this->response = array();
         $sql = "
-            SELECT * FROM perfiles WHERE idcuenta = '{$get['cuenta']}' AND eliminado = 0;
+            SELECT * FROM perfiles WHERE idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0;
             ";
-
         if ($result = $this->conexion->query($sql)) {
             $rows = $result->fetch_all(MYSQLI_ASSOC);
             if (!is_null($rows)) {
                 foreach ($rows as $num => $row) {
                     foreach ($row as $key => $value) {
-                        $this->response[$num][$key] = $value;
+                        $data[$num][$key] = $value;
                     }
                 }
             }
@@ -40,6 +43,30 @@ class Perfiles extends DataBase
             die('No se pudo completar la operación');
         }
         $this->conexion->close();
+        $this->response = $data;
+    }
+
+    public function listNumber($get)
+    {
+        $data = 0;
+        $user = $_SESSION['user'];
+        // $idCuenta = $this->conexion->query("SELECT idCuenta FROM usuarios WHERE user = '$user'")
+        // echo $user;
+        // $this->response = array();
+        $sql = "
+            SELECT COUNT(*) FROM perfiles WHERE idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0;
+            ";
+        if ($result = $this->conexion->query($sql)) {
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            if (!is_null($rows)) {
+                $data = $rows[0];
+            }
+            $result->free();
+        } else {
+            die('No se pudo completar la operación');
+        }
+        $this->conexion->close();
+        $this->response = $data;
     }
 
     public function add($post)
@@ -48,18 +75,23 @@ class Perfiles extends DataBase
             'estatus'  => 'Error',
             'mensaje' => 'El perfil ya existe en la base de datos'
         );
+        $user = $_SESSION['user'];
 
-        if (isset($post['nombre'])) {
+        if (isset($post['user'])) {
             $sql = "
-                SELECT * FROM perfiles WHERE nombre = '{$post['nombre']}' AND idcuenta = '{$post['cuenta']}'
+                SELECT * FROM perfiles WHERE nombre = '{$post['user']}' AND idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0
                 ";
             $result = $this->conexion->query($sql);
-            if ($result->num_rows == 0) {
+            $sql2 = "
+                SELECT * FROM perfiles WHERE idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0
+                ";
+            $result2 = $this->conexion->query($sql2);
+            if ($result->num_rows == 0 && $result2->num_rows < 7) {
                 $this->conexion->set_charset("utf8");
 
                 $sql = "
                     INSERT INTO perfiles (idperfil, idcuenta, nombre, idioma, edad, rutaImagen) VALUES
-                    (null, '{$post['cuenta']}', '{$post['nombre']}', '{$post['idioma']}', '{$post['edad']}', '{$post['imagen']}')
+                    (null, (SELECT idCuenta FROM usuarios WHERE user = '$user'), '{$post['user']}', '{$post['language']}', '{$post['age']}', '{$post['image']}')
                     ";
 
                 if ($this->conexion->query($sql)) {
@@ -71,6 +103,7 @@ class Perfiles extends DataBase
             }
             $result->free();
             $this->conexion->close();
+            header("location:../../profiles.php"); 
         }
     }
 
@@ -80,9 +113,10 @@ class Perfiles extends DataBase
             'estatus'  => 'Error',
             'mensaje' => 'El perfil no existe en la base de datos'
         );
-        if (isset($post['id'])) {
+        var_dump($post);
+        if (isset($post['idprofile'])) {
             $sql = "
-                UPDATE perfiles SET idcuenta = '{$post['cuenta']}', nombre = '{$post['nombre']}', idioma ='{$post['idioma']}', edad = '{$post['edad']}', rutaImagen = '{$post['imagen']}', eliminado = '{$post['eliminado']}' WHERE idperfil = '{$post['id']}'
+                UPDATE perfiles SET idcuenta = '{$post['idaccount']}', nombre = '{$post['user']}', idioma ='{$post['language']}', edad = '{$post['age']}', rutaImagen = '{$post['image']}' WHERE idperfil = '{$post['idprofile']}'
                 ";
             $this->conexion->set_charset("utf8");
             if ($this->conexion->query($sql)) {
@@ -92,6 +126,7 @@ class Perfiles extends DataBase
                 $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
             }
             $this->conexion->close();
+            header("location:../../profiles.php"); 
         }
     }
 
@@ -114,6 +149,7 @@ class Perfiles extends DataBase
                 $this->response['message'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
             }
             $this->conexion->close();
+            // header("location:../../profiles.php"); 
         }
     }
 
@@ -140,6 +176,34 @@ class Perfiles extends DataBase
                         }
                     }
                 }
+                $result->free();
+            } else {
+                die('No se pudo completar la operación');
+            }
+            $this->conexion->close();
+        }
+    }
+    public function searchById($get)
+    {
+        $this->response = array();
+        if (isset($get['search'])) {
+            $sql = "
+                SELECT * FROM Perfiles
+                WHERE idperfil = '{$get['search']}'
+                ";
+            if ($result = $this->conexion->query($sql)) {
+                $rows = $result->fetch_all(MYSQLI_ASSOC);
+                if (!is_null($rows)) {
+                    foreach ($rows as $num => $row) {
+                        foreach ($row as $key => $value) {
+                            $this->response[$num][$key] = $value;
+                        }
+                    }
+                }
+                // $nombre = $this->response[0]['nombre'];
+                // $imagen = $this->response[0]['rutaImagen'];
+                // $_SESSION['profile'] = $nombre;
+                // $_SESSION['imagen'] = $imagen;
                 $result->free();
             } else {
                 die('No se pudo completar la operación');
