@@ -18,6 +18,9 @@ $(document).ready(function () {
     
     //MUESTRA LOS CAMPOS CORRESPONDIENTES PARA AGREGAR UNA PELÍCULA
     $('#link-movies').click(function (e) {
+        edit = false;
+        resetForm();
+        $('#btn-agregar').text("Agregar Película");
         tipoElemento= "Pelicula";
         e.preventDefault();
         $('#form-seasons').hide();
@@ -35,6 +38,9 @@ $(document).ready(function () {
 
     //MUESTRA LOS CAMPOS CORRESPONDIENTES PARA AGREGAR UNA SERIE
     $('#link-series').click(function (e) {
+        edit = false;
+        resetForm();
+        $('#btn-agregar').text("Agregar Serie");
         tipoElemento= "Serie";
         e.preventDefault();
         $('#form-region').show();
@@ -69,8 +75,9 @@ $(document).ready(function () {
                     year: $('#form-year').val(),
                     tipoElemento
                 }, function (response) {
+                    console.log(response);
                     let respuesta = JSON.parse(response);
-                    //console.log(respuesta);
+                    console.log(respuesta);
                 });
             }
             else
@@ -89,7 +96,7 @@ $(document).ready(function () {
                 }, function (response) {
                     //console.log(response);
                     let respuesta = JSON.parse(response);
-                    //console.log(respuesta);
+                    console.log(respuesta);
                 });
             }
         }
@@ -111,7 +118,7 @@ $(document).ready(function () {
                 }, function (response) {
                     //console.log(response);
                     let respuesta = JSON.parse(response);
-                    //console.log(respuesta);
+                    console.log(respuesta);
                 });
             }
             else
@@ -131,13 +138,19 @@ $(document).ready(function () {
                 }, function (response) {
                     //console.log(response);
                     let respuesta = JSON.parse(response);
-                    //console.log(respuesta);
+                    console.log(respuesta);
                 });
             }
         }
 
     });
 
+    //FUNCIÓN PARA LIMPIAR EL FORMULARIO
+    function resetForm(){
+        $("form select").each(function(){this.selectedIndex=0});
+        $("form input[type=text]").each(function(){this.value=""});
+    }
+    //EVENTO CLICK DEL BOTON EDITAR
     $(document).on('click', '#btn-editar', function () {
         let elemento = $(this)[0].parentElement.parentElement;
         //console.log(elemento);
@@ -154,6 +167,7 @@ $(document).ready(function () {
             //console.log(contenido);
             if(tipo == 'Pelicula')
             {
+                $('#btn-agregar').text("Editar Película");
                 tipoElemento = 'Pelicula';
                 $("#form-chapters").hide();
                 $("#form-seasons").hide(); 
@@ -179,6 +193,7 @@ $(document).ready(function () {
             else 
             {
                 tipoElemento = 'Serie';
+                $('#btn-agregar').text("Editar Serie");
                 $("#form-duration").hide(); 
                 $('#form-region').show();
                 $('#form-genre').show();
@@ -235,14 +250,17 @@ $(document).ready(function () {
                         template += `
                             <tr contenidoId="${pelicula.id}" contenidoTipo="${pelicula.tipo}">
                                 <td>${pelicula.id}</td>
-                                <td>
-                                    <a href="#" class="">${pelicula.titulo}</a>
-                                </td>
+                                <td>${pelicula.titulo}</td>
                                 <td><ul>${descripcion}</ul></td>
                                 <td>
                                     <button class="product-delete btn btn-danger" id="btn-editar">
                                         Editar
                                     </button>
+                                </td>
+                                <td>
+                                    <button class="product-delete btn btn-danger" id="btn-eliminar">
+                                    Eliminar
+                                    </button>                                
                                 </td>
                             </tr>
                         `;

@@ -58,7 +58,7 @@ class Catalogo extends DataBase
             'estatus'  => 'Error',
             'mensaje' => 'El elemento ya existe en la base de datos'
         );
-        if($post['tipo'] == 'Pelicula')
+        if($post['tipoElemento'] == 'Pelicula')
         {
             if (isset($post['title'])) {
                 $sql = "

@@ -44,29 +44,28 @@
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="title" id="form-title" onBlur=""
-                                required placeholder="Título">
+                                placeholder="Título" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="duration" id="form-duration" onBlur=""
-                                placeholder="Duración">
+                                placeholder="Duración" >
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="seasons" id="form-seasons" onBlur=""
-                                placeholder="Número de temporadas">
+                                placeholder="Número de temporadas" >
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="chapters" id="form-chapters" onBlur=""
-                                placeholder="Total de capítulos">
+                                placeholder="Total de capítulos" >
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="image" id="form-image" onBlur=""
                                 placeholder="Ruta imagen" required>
                         </div>
                         <div class="form-group">
-                            <!-- <input list="region" class="form-control"name="region" id="form-region" onBlur="" placeholder="Región" required> -->
                             <select class="form-select form-control" aria-label="Default select example"
                                 name="region" id="form-region" onBlur="" required>
-                                <option hidden selected>Región</option>
+                                <option hidden selected value="">Región</option>
                                 <option value="1">0</option>
                                 <option value="2">1</option>
                                 <option value="3">2</option>
@@ -83,7 +82,7 @@
                             <!-- <input  list="genre" class="form-control" name="genre"  id="form-genre" onBlur="" placeholder="Género"/> -->
                             <select class="form-select form-control" aria-label="Default select example"
                                 name="genre" id="form-genre" onBlur="" required>
-                                <option hidden selected>Género</option>
+                                <option hidden selected value="">Género</option>
                                 <option value="1"> Ciencia Ficción </option>
                                 <option value="2"> Acción </option>
                                 <option value="3"> Comedia </option>
@@ -102,7 +101,7 @@
                             <!-- <input list="clasification" class="form-control" name="clasification" id="form-clasification" onBlur="" placeholder="Clasificación" require> -->
                             <select class="form-select form-control" aria-label="Default select example"
                                 name="clasification" id="form-clasification" onBlur="" required>
-                                <option hidden selected>Clasificación</option>
+                                <option hidden selected value="">Clasificación</option>
                                 <option value="1">AA</option>
                                 <option value="2">A</option>
                                 <option value="3">B</option>
@@ -116,7 +115,7 @@
                             <select class="form-select form-control"
                                 aria-label="Default select example" name="available" id="form-available"
                                 onBlur="" required>
-                                <option hidden selected>Disponible</option>
+                                <option hidden selected value="">Disponible</option>
                                 <option value="0"> Sí </option>
                                 <option value="1"> No </option>
                             </select>
@@ -158,25 +157,6 @@
     <!-- <script src="./js/jquery.min.js"></script> -->
     <!-- Lógica del Frontend -->
     <script src="./js/movies.js"></script>
-    <!-- <script>
-        $('#movies-form').submit(function (e) {
-            e.preventDefault();
-            console.log("entro a funcion");
-            $.post('./backend/catalogue/catalogue-addPelicula.php', {
-                idMovies: $('#form-id').val(),
-                title: $('#form-title').val(),
-                duration: $('#form-duration').val(),
-                image: $('#form-image').val(),
-                region: $('#form-region').val(),
-                genre: $('#form-genre').val(),
-                clasification: $('#form-clasification').val(),
-                year: $('#form-year').val()
-            }, function (response) {
-                let respuesta = JSON.parse(response);
-                console.log(respuesta);
-            });
-        });
-    </script> -->
 </body>
 
 </html>
