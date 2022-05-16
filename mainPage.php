@@ -3,6 +3,7 @@ session_start();
 if(isset($_SESSION['sesion']) != true) {
   header("location:./index.php"); 
 }
+// $profile = $_SESSION['profile'];
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@ if(isset($_SESSION['sesion']) != true) {
 <body>
   <header class="header-main">
     <img src="./img/alldaycinema3_blanco.png" alt="Logo" class="img-logo__edit img-main">
-    <a href="./mainPage.php" class="selector-main go-main">
+    <a href="./mainPage.php" class="selector-main go-main" id="home-selector">
       <img src="./img/home.png" alt="Inicio">
       <span>Home</span>
     </a>
@@ -39,10 +40,12 @@ if(isset($_SESSION['sesion']) != true) {
       <img src="./img/search.png" alt="Buscar">
       <!-- <span>Search</span> -->
       <input type="text" placeholder="Search" id="search-main">
+      <div class="resultados-busqueda" id="resultados"></div>
     </div>
+    <!-- <div class="resultados-busqueda" id="resultados"></div> -->
     <div class="profile-main" id="perfil-main">
-      <span class="profile-name">profileName</span>
-      <img src="./img/perfil.png" alt="">
+      <span class="profile-name" id="nombre-perfil"></span>
+      <img alt="" id="imagen-perfil">
     </div>
     <div class="profile-controlers" id="controles-main">
       <a href="./profiles.php" class="profile-controler">
@@ -138,14 +141,14 @@ if(isset($_SESSION['sesion']) != true) {
       <a href="./list.php" class="genero-card" id="accion-card">
         <img src="./img/accion.webp" alt="">
       </a>
-      <a href="./list.php" class="genero-card">
-        <img src="./img/ciencia.jpg" alt="" id="ciencia-card">
+      <a href="./list.php" class="genero-card" id="ciencia-card">
+        <img src="./img/ciencia.jpg" alt="" >
       </a>
-      <a href="./list.php" class="genero-card">
-        <img src="./img/drama.jpg" alt="" id="drama-card">
+      <a href="./list.php" class="genero-card" id="drama-card">
+        <img src="./img/drama.jpg" alt="" >
       </a>
-      <a href="./list.php" class="genero-card">
-        <img src="./img/suspenso.jpg" alt="" id="misterio-card">
+      <a href="./list.php" class="genero-card" id="misterio-card">
+        <img src="./img/suspenso.jpg" alt="" >
       </a>
     </section>
 
@@ -175,6 +178,6 @@ if(isset($_SESSION['sesion']) != true) {
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script src="./js/main.js"></script>
-
+  <script src="./js/search.js"></script>
 </body>
 </html>

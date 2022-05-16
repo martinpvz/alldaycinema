@@ -2,7 +2,7 @@ $(document).ready(function(){
   $.ajax({
     url: './backend/profile/profile-list.php',
     type: 'GET',
-    data: {cuenta:"2"},
+    // data: {cuenta:"2"},
     success: function(response) {
         // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
         console.log(response);
@@ -18,9 +18,9 @@ $(document).ready(function(){
             perfiles.forEach(perfil => {
               // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DEL PRODUCTO
               template += `
-              <a href="./mainPage.php" class="profile">
+              <a href="./mainPage.php?profile=${perfil.idperfil}" class="profile">
                 <img src="${perfil.rutaImagen}" alt="Foto perfil" class="profile-image">
-                <p class="profile-name">${perfil.nombre}</p>
+                <p class="profile-name" id="${perfil.idperfil}">${perfil.nombre}</p>
                 <img src="./img/edit.png" alt="Editar perfil" class="edit-image">
               </a>
               `;
@@ -39,14 +39,23 @@ $(document).ready(function(){
 });
 
 let editarPerfil = () => {
+  // var id = $("p").attr("id");
   let botones = document.getElementsByClassName("edit-image");
   for (let boton of botones) {
     boton.style.display = "block";
   }
   let perfiles = document.getElementsByClassName("profile");
+  let id = []
   for (let perfil of perfiles) {
-    perfil.href = "./editProfile.php"
+    id.push($(perfil).attr("id"));
+  }
+  console.log(id)
+  i = 0;
+  for (let perfil of perfiles) {
+    // console.log(id)
+    perfil.href = `./editProfile.php?profile=${id[i]}`
     perfil.style.animation = "tilt-shaking 0.5s infinite";
+    i += 1;
   }
   let agregar = document.getElementById("add-profile");
   agregar.style.display = "none";
@@ -70,14 +79,4 @@ let editarPerfil = () => {
     document.getElementById("editarPerfil").style.backgroundColor = "#ee5622";
     document.getElementById("editarPerfil").onclick = editarPerfil;
   }
-}
-
-
-document.getElementById("search-main").onfocus = () => {
-  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0.4rem 0.25rem #ee6c4d)"
-  console.log('hola')
-}
-document.getElementById("search-main").onblur = () => {
-  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0 0 white)"
-  console.log('hola')
 }

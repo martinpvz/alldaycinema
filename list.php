@@ -22,15 +22,15 @@ if(isset($_SESSION['sesion']) != true) {
 <body>
   <header class="header-main">
     <img src="./img/alldaycinema3_blanco.png" alt="Logo" class="img-logo__edit img-main">
-    <a href="./mainPage.php" class="selector-main go-main">
+    <a class="selector-main go-main" id="home-list">
       <img src="./img/home.png" alt="Inicio">
       <span>Home</span>
     </a>
-    <a href="./list.php" class="selector-main go-movies" id="peliculas-selector">
+    <a class="selector-main go-movies" id="peliculas-selector">
       <img src="./img/movies.png" alt="Peliculas">
       <span>Movies</span>
     </a>
-    <a href="./list.php" class="selector-main go-series" id="series-selector">
+    <a class="selector-main go-series" id="series-selector">
       <img src="./img/series.png" alt="Series">
       <span>Series</span>
     </a>
@@ -40,8 +40,8 @@ if(isset($_SESSION['sesion']) != true) {
       <input type="text" placeholder="Search" id="search-main">
     </div>
     <div class="profile-main" id="perfil-main">
-      <span class="profile-name">profileName</span>
-      <img src="./img/perfil.png" alt="">
+      <span class="profile-name" id="nombre-perfil"></span>
+      <img alt="" id="imagen-perfil">
     </div>
     <div class="profile-controlers" id="controles-main">
       <a href="./profiles.php" class="profile-controler">

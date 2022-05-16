@@ -1,4 +1,31 @@
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+  results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
+var profile = getParameterByName('profile');
+console.log(profile)
+$.ajax({
+  url: './backend/profile/profile-searchById.php',
+  type: 'GET',
+  data: {search: profile},
+  success: function(response) {
+      // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+      console.log(response);
+      const perfiles = JSON.parse(response);
+      console.log(perfiles);
+      
+  
+      // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
+      if(Object.keys(perfiles).length > 0) {
+          // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
+          document.getElementById("nombre-perfil").innerText = perfiles[0].nombre;
+          document.getElementById("imagen-perfil").src = perfiles[0].rutaImagen;
+      }
+    }
+  });
 /*Dropdown Menu*/
 $('.dropdown').click(function () {
   $(this).attr('tabindex', 1).focus();
@@ -25,27 +52,38 @@ $('.msg').html(msg + input + '</span>');
 
 document.getElementById("peliculas-selector").onclick = () => {
     localStorage.setItem("valor","Movies");
+    document.getElementById("peliculas-selector").href = `./list.php?profile=${profile}`;
 }
 
 document.getElementById("series-selector").onclick = () => {
     localStorage.setItem("valor","Series");
+    document.getElementById("series-selector").href = `./list.php?profile=${profile}`;
 }
 
 document.getElementById("accion-card").onclick = () => {
   localStorage.setItem("valor","Acción");
+  document.getElementById("accion-card").href = `./list.php?profile=${profile}`;
 }
 
 document.getElementById("ciencia-card").onclick = () => {
   localStorage.setItem("valor","Ciencia Ficción");
+  document.getElementById("ciencia-card").href = `./list.php?profile=${profile}`;
 }
 
 document.getElementById("drama-card").onclick = () => {
   localStorage.setItem("valor","Drama");
+  document.getElementById("drama-card").href = `./list.php?profile=${profile}`;
 }
 
 document.getElementById("misterio-card").onclick = () => {
   localStorage.setItem("valor","Suspenso");
+  document.getElementById("misterio-card").href = `./list.php?profile=${profile}`;
 }
+
+document.getElementById("home-selector").onclick = () => {
+  document.getElementById("home-selector").href = `./mainPage.php?profile=${profile}`;
+}
+
 
 
 function imprimirPeliculas(numero, posicion) {
@@ -55,7 +93,7 @@ function imprimirPeliculas(numero, posicion) {
     data: {type: numero},
     success: function(response) {
         // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-        console.log(response);
+        // console.log(response);
         const peliculas = JSON.parse(response);
         peliculasTrim = [];
         x = 0;
@@ -63,7 +101,7 @@ function imprimirPeliculas(numero, posicion) {
           peliculasTrim.push(peliculas[x]);
           x += 1;
         }
-        console.log(peliculasTrim)
+        // console.log(peliculasTrim)
         
     
         // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
@@ -105,3 +143,8 @@ document.getElementById('perfil-main').onmouseover = () => {
 document.getElementById('controles-main').onmouseleave = () => {
   document.getElementById('controles-main').style.display = "none";
 }
+
+// document.getElementById("search-main").onfocus = () => {
+//   document.getElementById("buscador-div").style.filter = "drop-shadow(0 0.4rem 0.25rem #ee6c4d)"
+//   console.log('hola')
+// }

@@ -25,7 +25,7 @@ if(isset($_SESSION['sesion']) != true) {
   <main class="main-login edit-profile">
     <h2 class="create-text">Crear perfil</h2>
     <div class="form-edit">
-      <form action="" method="post" class="form-register--edit">
+      <form action="./backend/profile/profile-add.php" method="post" class="form-register--edit">
         <div class="user-data__form user">
           <p>Usuario</p>
           <input type="text" name="user" id="user" required>

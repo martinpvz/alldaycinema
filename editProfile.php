@@ -70,5 +70,6 @@ if(isset($_SESSION['sesion']) != true) {
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
   <script src="./js/main.js"></script>
+  <script src="./js/editProfile.js"></script>
 </body>
 </html>
