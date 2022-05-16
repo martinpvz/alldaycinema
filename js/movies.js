@@ -1,20 +1,24 @@
 
 $(document).ready(function () {
-    //SE OCULTAN TODOS LOS CAMPOS DEL FORMULARIO 
+    //SE OCULTAN TODOS LOS CAMPOS DEL FORMULARIO
+    $('#status-bar').hide();
     listarCatalogo();
     let edit = false; 
-    let tipoElemento = "";            
-    $('#form-region').hide();
-    $('#form-genre').hide();
-    $('#form-clasification').hide();
-    $('#form-year').hide();
-    $('#form-title').hide();
-    $('#form-duration').hide();
-    $('#form-image').hide();
-    $('#form-available').hide();
-    $('#form-seasons').hide();
-    $('#form-chapters').hide();
-    $('#btn-agregar').hide();
+    let tipoElemento = "";
+    hideForm();
+    function hideForm(){
+        $('#form-region').hide();
+        $('#form-genre').hide();
+        $('#form-clasification').hide();
+        $('#form-year').hide();
+        $('#form-title').hide();
+        $('#form-duration').hide();
+        $('#form-image').hide();
+        $('#form-available').hide();
+        $('#form-seasons').hide();
+        $('#form-chapters').hide();
+        $('#btn-agregar').hide();
+    }
     
     //MUESTRA LOS CAMPOS CORRESPONDIENTES PARA AGREGAR UNA PELÍCULA
     $('#link-movies').click(function (e) {
@@ -79,6 +83,7 @@ $(document).ready(function () {
                     let respuesta = JSON.parse(response);
                     console.log(respuesta);
                 });
+                
             }
             else
             {
@@ -99,6 +104,7 @@ $(document).ready(function () {
                     console.log(respuesta);
                 });
             }
+            listarCatalogo();
         }
         else
         {
@@ -141,6 +147,7 @@ $(document).ready(function () {
                     console.log(respuesta);
                 });
             }
+            listarCatalogo();
         }
 
     });
@@ -221,9 +228,27 @@ $(document).ready(function () {
             } ;
             edit = true;
         });
-        $("#form-chapters").show();
-        $("#form-seasons").show();
-        $("#form-duration").show();
+
+    });
+    //EVENTO CLICK DEL BOTON ELIMINAR
+    $(document).on('click', '#btn-eliminar', function () {
+        let elemento = $(this)[0].parentElement.parentElement;
+        console.log(elemento);
+        let id = $(elemento).attr('contenidoId');
+        let tipo = $(elemento).attr('contenidoTipo');
+        console.log(id);
+        console.log(tipo);
+        if(confirm('¿Está seguro de querer eliminar este elemento?')){
+            $.post('./backend/catalogue/catalogue-delete.php', {
+                id,
+                tipo
+            }, function (response) {
+                //console.log(response);
+                let contenido = JSON.parse(response);
+                console.log(contenido); 
+            });
+            listarCatalogo();
+        }
     });
 
     function listarCatalogo() {
@@ -237,14 +262,18 @@ $(document).ready(function () {
                 if (Object.keys(peliculas).length > 0) {
                     let template = '';
                     peliculas.forEach(pelicula => {
-
+                        let disponible = "Sí";
+                        if(pelicula.eliminado == 1)
+                        {
+                            disponible = "No";
+                        }
                         let descripcion = '';
                         descripcion += '<li>Tipo: ' + pelicula.tipo + '</li>';
                         descripcion += '<li>Región: ' + pelicula.region + '</li>';
                         descripcion += '<li>Clasificación: ' + pelicula.clasificacion + '</li>';
                         descripcion += '<li>Lanzamiento: ' + pelicula.lanzamiento + '</li>';
                         descripcion += '<li>Género: ' + pelicula.genero + '</li>';
-                        descripcion += '<li>Disponible: ' + pelicula.eliminado + '</li>';
+                        descripcion += '<li>Disponible: ' + disponible + '</li>';
                         descripcion += '<li>Ruta imagen: ' + pelicula.imagen + '</li>';
 
                         template += `
@@ -253,12 +282,12 @@ $(document).ready(function () {
                                 <td>${pelicula.titulo}</td>
                                 <td><ul>${descripcion}</ul></td>
                                 <td>
-                                    <button class="product-delete btn btn-danger" id="btn-editar">
+                                    <button class=" btn btn-primary" id="btn-editar">
                                         Editar
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="product-delete btn btn-danger" id="btn-eliminar">
+                                    <button class="btn btn-danger" id="btn-eliminar">
                                     Eliminar
                                     </button>                                
                                 </td>
