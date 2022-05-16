@@ -46,6 +46,29 @@ class Perfiles extends DataBase
         $this->response = $data;
     }
 
+    public function listNumber($get)
+    {
+        $data = 0;
+        $user = $_SESSION['user'];
+        // $idCuenta = $this->conexion->query("SELECT idCuenta FROM usuarios WHERE user = '$user'")
+        // echo $user;
+        // $this->response = array();
+        $sql = "
+            SELECT COUNT(*) FROM perfiles WHERE idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0;
+            ";
+        if ($result = $this->conexion->query($sql)) {
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            if (!is_null($rows)) {
+                $data = $rows[0];
+            }
+            $result->free();
+        } else {
+            die('No se pudo completar la operación');
+        }
+        $this->conexion->close();
+        $this->response = $data;
+    }
+
     public function add($post)
     {
         $this->response = array(
@@ -56,14 +79,14 @@ class Perfiles extends DataBase
 
         if (isset($post['user'])) {
             $sql = "
-                SELECT * FROM perfiles WHERE nombre = '{$post['user']}' AND idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user')
+                SELECT * FROM perfiles WHERE nombre = '{$post['user']}' AND idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0
                 ";
             $result = $this->conexion->query($sql);
             $sql2 = "
-                SELECT * FROM perfiles WHERE idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user')
+                SELECT * FROM perfiles WHERE idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0
                 ";
             $result2 = $this->conexion->query($sql2);
-            if ($result->num_rows == 0 && $result2->num_rows < 4) {
+            if ($result->num_rows == 0 && $result2->num_rows < 7) {
                 $this->conexion->set_charset("utf8");
 
                 $sql = "
@@ -90,9 +113,10 @@ class Perfiles extends DataBase
             'estatus'  => 'Error',
             'mensaje' => 'El perfil no existe en la base de datos'
         );
-        if (isset($post['id'])) {
+        var_dump($post);
+        if (isset($post['idprofile'])) {
             $sql = "
-                UPDATE perfiles SET idcuenta = '{$post['cuenta']}', nombre = '{$post['nombre']}', idioma ='{$post['idioma']}', edad = '{$post['edad']}', rutaImagen = '{$post['imagen']}', eliminado = '{$post['eliminado']}' WHERE idperfil = '{$post['id']}'
+                UPDATE perfiles SET idcuenta = '{$post['idaccount']}', nombre = '{$post['user']}', idioma ='{$post['language']}', edad = '{$post['age']}', rutaImagen = '{$post['image']}' WHERE idperfil = '{$post['idprofile']}'
                 ";
             $this->conexion->set_charset("utf8");
             if ($this->conexion->query($sql)) {
@@ -102,6 +126,7 @@ class Perfiles extends DataBase
                 $this->response['mensaje'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
             }
             $this->conexion->close();
+            header("location:../../profiles.php"); 
         }
     }
 
@@ -124,6 +149,7 @@ class Perfiles extends DataBase
                 $this->response['message'] = "No se pudo ejecutar la instrucción $sql. " . mysqli_error($this->conexion);
             }
             $this->conexion->close();
+            // header("location:../../profiles.php"); 
         }
     }
 

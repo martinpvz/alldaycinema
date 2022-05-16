@@ -25,7 +25,15 @@ if(isset($_SESSION['sesion']) != true) {
   <main class="main-login edit-profile">
     <h2 class="create-text">Editar perfil</h2>
     <div class="form-edit">
-      <form action="" method="post" class="form-register--edit">
+      <form action="./backend/profile/profile-edit.php" method="post" class="form-register--edit">
+        <div class="user-data__form user" hidden>
+          <p>idCuenta</p>
+          <input type="text" name="idaccount" id="idaccount">
+        </div>
+        <div class="user-data__form user" hidden>
+          <p>idPerfil</p>
+          <input type="text" name="idprofile" id="idprofile">
+        </div>
         <div class="user-data__form user">
           <p>Usuario</p>
           <input type="text" name="user" id="user" required>
@@ -56,11 +64,11 @@ if(isset($_SESSION['sesion']) != true) {
         <div class="control-buttons">
           <input type="submit" value="Guardar" class="button-register register-button">
           <button type="button" class="button-register cancel-button" onclick="location.href = './profiles.php'">Cancelar</button>
-          <button type="button" class="button-register delete-button">Eliminar perfil</button>
+          <button id="eliminar-perfil" type="button" class="button-register delete-button">Eliminar perfil</button>
         </div>
       </form>
       <div class="image-edit__container">
-        <img src="./img/perfil.png" alt="Imagen de perfil" class="image-edit">
+        <img src="./img/perfil.png" alt="Imagen de perfil" class="image-edit" id="image-edit">
       </div>
     </div>
 

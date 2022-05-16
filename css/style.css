@@ -292,7 +292,7 @@ span.choose {
   cursor: pointer;
 }
 .profiles {
-  width: 70%;
+  width: 40%;
   margin: 0 auto;
   margin-top: 20px;
   height: auto;
@@ -666,7 +666,7 @@ body header .go-search:hover {
   z-index: 3;
 }
 
-header div .resultados-busqueda {
+body header div .resultados-busqueda {
   position: absolute;
   z-index: 99;
   left: 10px;

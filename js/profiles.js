@@ -36,7 +36,36 @@ $(document).ready(function(){
       }
     });
 
+    $.ajax({
+      url: './backend/profile/profile-listNumber.php',
+      type: 'GET',
+      // data: {cuenta:"2"},
+      success: function(response) {
+          const perfiles = JSON.parse(response);
+          // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
+          if(Object.keys(perfiles).length > 0) {
+              // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
+              perfilesNum = perfiles["COUNT(*)"];
+              console.log("Numero de perfiles: "+ perfiles["COUNT(*)"]);
+              if (perfilesNum >= 7) {
+                document.getElementById("add-profile").style.display = "none";
+              } 
+              if (perfilesNum == 2) {
+                document.getElementById("profiles-list").style.width = "50%";
+              } else if (perfilesNum == 3) {
+                document.getElementById("profiles-list").style.width = "60%";
+              } else if (perfilesNum == 4) {
+                document.getElementById("profiles-list").style.width = "70%";
+              } else if (perfilesNum >= 5) {
+                document.getElementById("profiles-list").style.width = "90%";
+              }
+              
+          }
+        }
+      });
+
 });
+
 
 let editarPerfil = () => {
   // var id = $("p").attr("id");
@@ -45,15 +74,17 @@ let editarPerfil = () => {
     boton.style.display = "block";
   }
   let perfiles = document.getElementsByClassName("profile");
+  let perfilesId = document.getElementsByClassName("profile-name");
   let id = []
-  for (let perfil of perfiles) {
+  for (let perfil of perfilesId) {
     id.push($(perfil).attr("id"));
   }
   console.log(id)
   i = 0;
   for (let perfil of perfiles) {
     // console.log(id)
-    perfil.href = `./editProfile.php?profile=${id[i]}`
+    perfil.href = `./editProfile.php?profile=${id[i]}`;
+    // perfil.href = `./editProfile.php`;
     perfil.style.animation = "tilt-shaking 0.5s infinite";
     i += 1;
   }
@@ -68,9 +99,17 @@ let editarPerfil = () => {
       boton.style.display = "none";
     }
     let perfiles = document.getElementsByClassName("profile");
+    let perfilesId = document.getElementsByClassName("profile-name");
+    let id = []
+    for (let perfil of perfilesId) {
+      id.push($(perfil).attr("id"));
+    }
+    console.log(id)
+    i = 0;
     for (let perfil of perfiles) {
-      perfil.href = "./mainPage.php"
+      perfil.href = `./mainPage.php?profile=${id[i]}`;
       perfil.style.animation = "none";
+      i += 1;
     }
     let agregar = document.getElementById("add-profile");
     agregar.style.display = "block";
