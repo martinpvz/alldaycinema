@@ -19,7 +19,7 @@ class Catalogo extends DataBase
         return json_encode($this->response, JSON_PRETTY_PRINT);
     }
 
-    public function list()
+    public function listAdmin()
     {
         $this->response = array();
         $sql = "

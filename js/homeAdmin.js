@@ -82,8 +82,7 @@ $(document).ready(function () {
                     console.log(response);
                     let respuesta = JSON.parse(response);
                     console.log(respuesta);
-                });
-                
+                });          
             }
             else
             {
@@ -253,7 +252,7 @@ $(document).ready(function () {
 
     function listarCatalogo() {
         $.ajax({
-            url: './backend/catalogue/catalogue-list.php',
+            url: './backend/catalogue/catalogue-listAdmin.php',
             type: 'GET',
             success: function (response) {
                 //console.log(response);
