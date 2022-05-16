@@ -23,56 +23,6 @@ $('.msg').html(msg + input + '</span>');
 }); 
 
 
-let editarPerfil = () => {
-  let botones = document.getElementsByClassName("edit-image");
-  for (let boton of botones) {
-    boton.style.display = "block";
-  }
-  let perfiles = document.getElementsByClassName("profile");
-  for (let perfil of perfiles) {
-    perfil.href = "./editProfile.html"
-    perfil.style.animation = "tilt-shaking 0.5s infinite";
-  }
-  let agregar = document.getElementById("add-profile");
-  agregar.style.display = "none";
-  document.getElementById("create-text").innerHTML = "¿Qué perfil deseas modificar?";
-  document.getElementById("editarPerfil").innerHTML = "Cancelar";
-  document.getElementById("editarPerfil").style.backgroundColor = "#ee2222";
-  document.getElementById("editarPerfil").onclick = () => {
-    let botones = document.getElementsByClassName("edit-image");
-    for (let boton of botones) {
-      boton.style.display = "none";
-    }
-    let perfiles = document.getElementsByClassName("profile");
-    for (let perfil of perfiles) {
-      perfil.href = "./mainPage.html"
-      perfil.style.animation = "none";
-    }
-    let agregar = document.getElementById("add-profile");
-    agregar.style.display = "block";
-    document.getElementById("editarPerfil").innerHTML = "Editar perfiles";
-    document.getElementById("create-text").innerHTML = "¿Quién eres?";
-    document.getElementById("editarPerfil").style.backgroundColor = "#ee5622";
-    document.getElementById("editarPerfil").onclick = editarPerfil;
-  }
-}
-
-document.getElementById('perfil-main').onmouseover = () => {
-  document.getElementById('controles-main').style.display = "inherit";
-}
-document.getElementById('controles-main').onmouseleave = () => {
-  document.getElementById('controles-main').style.display = "none";
-}
-
-document.getElementById("search-main").onfocus = () => {
-  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0.4rem 0.25rem #ee6c4d)"
-  console.log('hola')
-}
-document.getElementById("search-main").onblur = () => {
-  document.getElementById("buscador-div").style.filter = "drop-shadow(0 0 0 white)"
-  console.log('hola')
-}
-
 document.getElementById("peliculas-selector").onclick = () => {
     localStorage.setItem("valor","Movies");
 }
@@ -148,3 +98,10 @@ imprimirPeliculas(2, '#carousel-accion');
 imprimirPeliculas(3, '#carousel-comedy');
 imprimirPeliculas(6, '#carousel-musical');
 imprimirPeliculas(4, '#carousel-fantasy');
+
+document.getElementById('perfil-main').onmouseover = () => {
+  document.getElementById('controles-main').style.display = "inherit";
+}
+document.getElementById('controles-main').onmouseleave = () => {
+  document.getElementById('controles-main').style.display = "none";
+}

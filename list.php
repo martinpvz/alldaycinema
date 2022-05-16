@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['sesion']) != true) {
+  header("location:./index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,15 +22,15 @@
 <body>
   <header class="header-main">
     <img src="./img/alldaycinema3_blanco.png" alt="Logo" class="img-logo__edit img-main">
-    <a href="./mainPage.html" class="selector-main go-main">
+    <a href="./mainPage.php" class="selector-main go-main">
       <img src="./img/home.png" alt="Inicio">
       <span>Home</span>
     </a>
-    <a href="./list.html" class="selector-main go-movies" id="peliculas-selector">
+    <a href="./list.php" class="selector-main go-movies" id="peliculas-selector">
       <img src="./img/movies.png" alt="Peliculas">
       <span>Movies</span>
     </a>
-    <a href="./list.html" class="selector-main go-series" id="series-selector">
+    <a href="./list.php" class="selector-main go-series" id="series-selector">
       <img src="./img/series.png" alt="Series">
       <span>Series</span>
     </a>
@@ -38,10 +44,10 @@
       <img src="./img/perfil.png" alt="">
     </div>
     <div class="profile-controlers" id="controles-main">
-      <a href="./profiles.html" class="profile-controler">
+      <a href="./profiles.php" class="profile-controler">
         <p>Cambiar perfil</p>
       </a>
-      <a href="./index.html" class="profile-controler">
+      <a href="./index.php" class="profile-controler">
         <p>Cerrar sesión</p>
       </a>
     </div>
@@ -49,30 +55,6 @@
   <main>
     <h2 class="title-list" id="title-list">Movies</h2>
     <div class="list-container" id="list-container">
-      <!-- <a href="#" class="list-item">
-        <img src="./img/AmericanHS.jpg" alt="Foto de pelicula">
-      </a>
-      <a href="#" class="list-item">
-        <img src="./img/Avatar.jpg" alt="Foto de pelicula">
-      </a>
-      <a href="#" class="list-item">
-        <img src="./img/Bridgerton.jpg" alt="Foto de pelicula">
-      </a>
-      <a href="#" class="list-item">
-        <img src="./img/ChicasCable.jpg" alt="Foto de pelicula">
-      </a>
-      <a href="#" class="list-item">
-        <img src="./img/Clark.jpg" alt="Foto de pelicula">
-      </a>
-      <a href="#" class="list-item">
-        <img src="./img/Dark.jpg" alt="Foto de pelicula">
-      </a>
-      <a href="#" class="list-item">
-        <img src="./img/Encanto.jpg" alt="Foto de pelicula">
-      </a>
-      <a href="#" class="list-item">
-        <img src="./img/AnnWithAnE.jpg" alt="Foto de pelicula">
-      </a> -->
     </div>
   </main>
 

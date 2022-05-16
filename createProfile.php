@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['sesion']) != true) {
+  header("location:./index.php"); 
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -49,7 +55,7 @@
         </div>
         <div class="control-buttons">
           <input type="submit" value="Guardar" class="button-register register-button">
-          <button type="button" class="button-register cancel-button" onclick="location.href = './profiles.html'">Cancelar</button>
+          <button type="button" class="button-register cancel-button" onclick="location.href = './profiles.php'">Cancelar</button>
         </div>
       </form>
       <div class="image-edit__container">

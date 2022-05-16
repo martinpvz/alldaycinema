@@ -33,7 +33,7 @@
 
     <div class="register">
       <span>¿Aún no tienes cuenta?</span>
-      <a href="./registro.html" class="register-link">Regístrate</a>
+      <a href="./registro.php" class="register-link">Regístrate</a>
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"

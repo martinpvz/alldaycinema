@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(isset($_SESSION['sesion']) != true) {
+  header("location:./index.php"); 
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,15 +23,15 @@
 <body>
   <header class="header-main">
     <img src="./img/alldaycinema3_blanco.png" alt="Logo" class="img-logo__edit img-main">
-    <a href="./mainPage.html" class="selector-main go-main">
+    <a href="./mainPage.php" class="selector-main go-main">
       <img src="./img/home.png" alt="Inicio">
       <span>Home</span>
     </a>
-    <a href="./list.html" class="selector-main go-movies" id="peliculas-selector">
+    <a href="./list.php" class="selector-main go-movies" id="peliculas-selector">
       <img src="./img/movies.png" alt="Peliculas">
       <span>Movies</span>
     </a>
-    <a href="./list.html" class="selector-main go-series" id="series-selector">
+    <a href="./list.php" class="selector-main go-series" id="series-selector">
       <img src="./img/series.png" alt="Series">
       <span>Series</span>
     </a>
@@ -38,10 +45,10 @@
       <img src="./img/perfil.png" alt="">
     </div>
     <div class="profile-controlers" id="controles-main">
-      <a href="./profiles.html" class="profile-controler">
+      <a href="./profiles.php" class="profile-controler">
         <p>Cambiar perfil</p>
       </a>
-      <a href="./index.html" class="profile-controler">
+      <a href="./logout.php" class="profile-controler" id="cerrar-sesion">
         <p>Cerrar sesión</p>
       </a>
     </div>
@@ -128,16 +135,16 @@
     </section>
 
     <section class="generos-main">
-      <a href="./list.html" class="genero-card" id="accion-card">
+      <a href="./list.php" class="genero-card" id="accion-card">
         <img src="./img/accion.webp" alt="">
       </a>
-      <a href="./list.html" class="genero-card">
+      <a href="./list.php" class="genero-card">
         <img src="./img/ciencia.jpg" alt="" id="ciencia-card">
       </a>
-      <a href="./list.html" class="genero-card">
+      <a href="./list.php" class="genero-card">
         <img src="./img/drama.jpg" alt="" id="drama-card">
       </a>
-      <a href="./list.html" class="genero-card">
+      <a href="./list.php" class="genero-card">
         <img src="./img/suspenso.jpg" alt="" id="misterio-card">
       </a>
     </section>

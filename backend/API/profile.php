@@ -5,7 +5,7 @@ namespace DataBase;
 use DataBase\DataBase;
 
 require_once __DIR__ . '/database.php';
-
+session_start();
 class Perfiles extends DataBase
 {
     public function __construct($string = 'vod')
@@ -22,9 +22,12 @@ class Perfiles extends DataBase
     public function list($get)
     {
         $data = array();
+        $user = $_SESSION['user'];
+        // $idCuenta = $this->conexion->query("SELECT idCuenta FROM usuarios WHERE user = '$user'")
+        // echo $user;
         // $this->response = array();
         $sql = "
-            SELECT * FROM perfiles WHERE idcuenta = '{$get['cuenta']}' AND eliminado = 0;
+            SELECT * FROM perfiles WHERE idcuenta = (SELECT idCuenta FROM usuarios WHERE user = '$user') AND eliminado = 0;
             ";
         if ($result = $this->conexion->query($sql)) {
             $rows = $result->fetch_all(MYSQLI_ASSOC);
