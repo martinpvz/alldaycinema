@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['sesion']) != true) {
+    header("location:./index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +20,7 @@
 <!-- BARRA DE NAVEGACIÓN  -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <img src="./img/alldaycinema2_blanco.png" alt="Logo de imagen" width="100px" >
-    <a class="navbar-brand" style="padding-left: 20px;" href="./homeAdmin_Peliculas.html">AdminHome</a>
+    <a class="navbar-brand" style="padding-left: 20px;" href="./homeAdmin_Peliculas.php">AdminHome</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,6 +34,7 @@
             <!-- <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button> -->
             <img src="./img/search.png" alt="Buscar" width="30px">
         </form>
+        <a href="./logout.php" style="font-size: 0.9rem; margin-right: 10px; margin-left: 10px;" id="cerrar-sesionAd" class="btn btn-sm btn-danger">Cerrar sesión</a>
     </div>
 </nav>
 
